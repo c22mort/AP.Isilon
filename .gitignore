@@ -256,3 +256,6 @@ paket-files/
 __pycache__/
 *.pyc
 
+# AP.Isilon Ignores
+clusters.csv
+config.csv
