@@ -1,12 +1,12 @@
-# AP.F5
-F5 SCOM Management Pack - A free alternative F5 Management Pack for System Center Operations Manager.
+# AP.Isilon
+EMC Isilon Management Pack - A free alternative Isilon Management Pack for System Center Operations Manager.
 
-## AP.F5.Base.Discovery (Console Application)
-* **F5 Devices**
-* **F5 Device Hardware** - CPU, Memory, Fans, Temperature Sensors, Power Supplies.
+## AP.Isilon.Discovery (Console Application)
+* **Isilon Clusters**
+* **Ision Node Hardware** - Temperature Sensors, Disks, Licences and Protocols.
 
-This Application utilizes 2 csv files devices.csv and config.csv.
-**device.csv** this is a list of; device ip, SNMP Community, SNMP Port, F5 UserName, F5 Password. 
+This Application utilizes 2 csv files clusters.csv and config.csv.
+**clusters.csv** this is a list of; cluster ip, SNMP Community, Isilon ISI username, Isilon ISI Password. 
 There is a an example file called example_devices.csv included, rename this file to devices.csv and fill in your information, the header row is needed.
 **config.csv** this currently just has the Management server that the discovery data will be sent to, if this file doesn't exist localhost will be used, useful if you are running it on a management server.  Again an example file is included.
 I have this scheduled to run every 24 Hours, but as we are only discovering devices you can run it less frequently if you so desire.
