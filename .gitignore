@@ -256,6 +256,6 @@ paket-files/
 __pycache__/
 *.pyc
 
-# AP.F5 Ignores
-devices.csv
+# AP.Isilon Ignores
+clusters.csv
 config.csv
