@@ -1,0 +1,161 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <MonitorTypes>
+      <UnitMonitorType ID="AP.Isilon.Monitor.Disk.Health.SNMP" Accessibility="Public">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="DiskHealthy" NoDetection="false" />
+          <MonitorTypeState ID="DiskWarning" NoDetection="false" />
+          <MonitorTypeState ID="DiskCritical" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>System!System.ExpressionEvaluatorSchema</SchemaType>
+            <SchemaType>SNMP!System.SnmpVarBindsSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="IP" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="NoOfRetries" type="xsd:unsignedInt" default="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Timeout " type="xsd:unsignedInt" default="500" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Community" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="NoOfRetries" Selector="$Config/NoOfRetries$" ParameterType="int" />
+          <OverrideableParameter ID="Timeout" Selector="$Config/Timeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+              <Scheduler>
+                <SimpleReccuringSchedule>
+                  <Interval>$Config/IntervalSeconds$</Interval>
+                  <SpreadInitializationOverInterval>$Config/IntervalSeconds$</SpreadInitializationOverInterval>
+                </SimpleReccuringSchedule>
+                <ExcludeDates />
+              </Scheduler>
+            </DataSource>
+            <ProbeAction ID="SnmpProbe" TypeID="SNL!System.NetworkManagement.SnmpProbe">
+              <Walk>false</Walk>
+              <WalkReturnMultipleItems>true</WalkReturnMultipleItems>
+              <NoOfRetries>$Config/NoOfRetries$</NoOfRetries>
+              <Timeout>$Config/Timeout$</Timeout>
+              <Port>161</Port>
+              <IsWriteAction>false</IsWriteAction>
+              <IP>$Config/IP$</IP>
+              <CommunityString>$Config/Community$</CommunityString>
+              <Version>2</Version>
+              <SnmpVarBinds>
+                <SnmpVarBind>
+                  <!-- .iso.org.dod.internet.private.enterprises.isilon.node.diskTable.diskEntry.diskStatus -->
+                  <OID>.1.3.6.1.4.1.12124.2.52.1.5.$Target/Property[Type="AP.Isilon.Disk"]/Index$</OID>
+                  <Syntax>0</Syntax>
+                  <Value VariantType="8" />
+                </SnmpVarBind>
+              </SnmpVarBinds>
+            </ProbeAction>
+            <ConditionDetection ID="DiskHealthyFilterCondition" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <Or>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Integer">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.52.1.5.$Target/Property[Type="AP.Isilon.Disk"]/Index$']/Value</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="String">HEALTHY</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Integer">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.52.1.5.$Target/Property[Type="AP.Isilon.Disk"]/Index$']/Value</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="String">L3</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </Or>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="DiskWarningFilterCondition" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="Integer">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.52.1.5.$Target/Property[Type="AP.Isilon.Disk"]/Index$']/Value</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">SMARTFAIL</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="DiskCriticalFilterCondition" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="Integer">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.52.1.5.$Target/Property[Type="AP.Isilon.Disk"]/Index$']/Value</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">DEAD</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="DiskHealthy">
+              <Node ID="DiskHealthyFilterCondition">
+                <Node ID="SnmpProbe">
+                  <Node ID="Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="DiskWarning">
+              <Node ID="DiskWarningFilterCondition">
+                <Node ID="SnmpProbe">
+                  <Node ID="Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="DiskCritical">
+              <Node ID="DiskCriticalFilterCondition">
+                <Node ID="SnmpProbe">
+                  <Node ID="Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+    </MonitorTypes>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon.Monitor.Disk.Health.SNMP">
+          <Name>Isilon Disk Status</Name>
+          <Description>Monitors Isilon Disk Status</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.Disk.Health.SNMP" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.Disk.Health.SNMP" SubElementID="NoOfRetries">
+          <Name>Number of Retries</Name>
+          <Description>Number of times that the request should be retried if the first request fails.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.Disk.Health.SNMP" SubElementID="Timeout">
+          <Name>Timeout</Name>
+          <Description>Seconds that the request must be complete before it is terminated.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

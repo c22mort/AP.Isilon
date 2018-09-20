@@ -1,0 +1,85 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      <DataSourceModuleType ID="AP.Isilon.DataSource.Licence.Discovey" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="SpreadInterval" type="xsd:integer" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int"/>
+          <OverrideableParameter ID="SpreadInterval" Selector="$Config/SpreadInterval$" ParameterType="int"/>
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Scheduler" TypeID="System!System.Discovery.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval>$Config/IntervalSeconds$</Interval>
+                    <SpreadInitializationOverInterval>$Config/SpreadInterval$</SpreadInitializationOverInterval>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="ScriptProbePS" TypeID="Windows!Microsoft.Windows.PowerShellDiscoveryProbe">
+                <ScriptName>Discover-IsilonLicences.ps1</ScriptName>
+                <ScriptBody>$IncludeFileContent/Scripts/Discover-IsilonLicences.ps1$</ScriptBody>
+                <SnapIns />
+                <Parameters>
+                  <Parameter>
+                    <Name>SourceId</Name>
+                    <Value>$MPElement$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>ManagedEntityId</Name>
+                    <Value>$Target/Id$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>ClusterIP</Name>
+                    <Value>$Target/Property[Type="AP.Isilon.Cluster"]/IPAddress$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>ClusterName</Name>
+                    <Value>$Target/Property[Type="AP.Isilon.Cluster"]/Name$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>Community</Name>
+                    <Value>$Target/Property[Type="AP.Isilon.Cluster"]/Community$</Value>
+                  </Parameter>
+                </Parameters>
+                <TimeoutSeconds>300</TimeoutSeconds>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="ScriptProbePS">
+                <Node ID="Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.Discovery.Data</OutputType>
+      </DataSourceModuleType>
+    </ModuleTypes>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon.DataSource.Licence.Discovey">
+          <Name>Isilon License Discovery</Name>
+          <Description>Discovers an Isilon Clusters Licences</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.DataSource.Licence.Discovey" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.DataSource.Licence.Discovey" SubElementID="SpreadInterval">
+          <Name>Spread Interval</Name>
+          <Description>Time that iterations of this module are spread over should be less that Interval Seconds.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+  
+</ManagementPackFragment>

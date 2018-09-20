@@ -1,0 +1,444 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instancea415de9e4e5e46228589253d12d4f66a" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Cluster.SnapshotCapacity.Tb</Id>
+        <DisplayName>Cluster Snapshot Capacity (Tb) Rule</DisplayName>
+        <Description>Collect Isilon Cluster Snashot Capacity Tb</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Cluster</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;3600&lt;/IntervalSeconds&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.SnapshotSpace.Tb</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instancefece2e64862848f99400fc7775300dd4" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Perf.Cluster.UsedCapacity.Percentage</Id>
+        <DisplayName>Cluster Used Capacity (%) Rule</DisplayName>
+        <Description>Collect Isilon Cluster Used Capacity Percentage</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Cluster</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;3600&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:05&lt;/SyncTime&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Cluster"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.cluster.ifsFilesystem.ifsUsedBytes.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.1.3.2.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.cluster.ifsFilesystem.ifsTotalBytes.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.1.3.1.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Cluster&lt;/ObjectName&gt;&lt;CounterName&gt;Used Capacity(%)&lt;/CounterName&gt;&lt;InstanceName&gt;&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.SNMP.Percentage</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance5565c17044b8430d880aa5ee1e3ea9f3" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Perf.Cluster.UsedCapacity.Tb</Id>
+        <DisplayName>Cluster Used Capacity (Tb) Rule</DisplayName>
+        <Description>Collect Isilon Cluster Used Capacity in Tb</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Cluster</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;3600&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;00:05&lt;/SyncTime&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Cluster"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.cluster.ifsFilesystem.ifsUsedBytes.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.1.3.2.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Cluster&lt;/ObjectName&gt;&lt;CounterName&gt;Used Capacity&lt;/CounterName&gt;&lt;InstanceName&gt;&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.ConvertBytesToTb</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance481e6ee4b9ac41e097d9b4dc97378c8b" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Protocol.AverageLatency</Id>
+        <DisplayName>Protocol Average Latency Rule</DisplayName>
+        <Description>Collect Isilon Protocol Average Latency</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Protocol</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Host/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeProtocolPerfTable.nodeProtocolPerfEntry.latencyAverage --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.2.2.10.1.16$Target/Property[Type="AP.Isilon.Protocol"]/OidSuffix$&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Protocol&lt;/ObjectName&gt;&lt;CounterName&gt;Avg. Latency&lt;/CounterName&gt;&lt;InstanceName&gt;&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.SingleValue.SNMP</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance3de7ee9d3640400d99f37c6550119a79" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Cluster.SnapshotCapacity.Percentage</Id>
+        <DisplayName>Cluster Snapshot Capacity (%) Rule</DisplayName>
+        <Description>Collect Isilon Cluster Snashot Capacity Percentage</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Cluster</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;3600&lt;/IntervalSeconds&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.SnapshotSpace.Percentage</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instancedcf298b8230049b1945935e1310870be" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Cluster.Network.Outbound</Id>
+        <DisplayName>Cluster Network Outbound Rule</DisplayName>
+        <Description>Collect Isilon Cluster Outbound Network (Mb/s)</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Cluster</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Cluster"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.cluster.clusterPerformance.clusterNetworkPerf.clusterNetworkOutBitsPerSecond.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.1.2.2.4.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Cluster&lt;/ObjectName&gt;&lt;CounterName&gt;Network&lt;/CounterName&gt;&lt;InstanceName&gt;Outbound&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.ConvertBitsToMb</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instanced2d7098cd02f4ec3922f8343a8dd0ccd" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Cluster.Filesystem.Outbound</Id>
+        <DisplayName>Cluster Filesystem Outbound Rule</DisplayName>
+        <Description>Collect Isilon Cluster Outbound Filesystem Throughput </Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Cluster</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Cluster"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.cluster.clusterPerformance.clusterNetworkPerf.clusterNetworkInBitsPerSecond.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.1.2.2.2.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Cluster&lt;/ObjectName&gt;&lt;CounterName&gt;FileSystem&lt;/CounterName&gt;&lt;InstanceName&gt;Outbound&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.ConvertBitsToMb</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance1cc701a219e24e1886fe7ca2cb06fc4c" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Node.CPU.Usage</Id>
+        <DisplayName>Node CPU Usage Rule</DisplayName>
+        <Description>Collect Isilon Node CPU Usage (%)</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Node</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeCPUPerf.nodeCPUIdle.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.2.2.3.5.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Node&lt;/ObjectName&gt;&lt;CounterName&gt;CPU Usage&lt;/CounterName&gt;&lt;InstanceName&gt;&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.CpuPercentage</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance96cd852f6bd74404bb9d7676d9ac175b" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Perf.Node.Filesystem.Outbound</Id>
+        <DisplayName>Node Filesystem Outbound Rule</DisplayName>
+        <Description>Collect Isilon Node Outbound Filesystem Throughput </Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Node</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeIfsPerf.nodeIfsOutBitsPerSecond.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.2.2.1.4.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Node&lt;/ObjectName&gt;&lt;CounterName&gt;FileSystem&lt;/CounterName&gt;&lt;InstanceName&gt;Outbound&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.ConvertBitsToMb</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instanced79fff4395c44973950d9bbfa0350ab5" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Cluster.Network.Inbound</Id>
+        <DisplayName>Cluster Network Inbound Rule</DisplayName>
+        <Description>Collect Isilon Cluster Inbound Network (Mb/s)</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Cluster</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Cluster"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.cluster.clusterPerformance.clusterNetworkPerf.clusterNetworkInBitsPerSecond.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.1.2.2.2.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Cluster&lt;/ObjectName&gt;&lt;CounterName&gt;Network&lt;/CounterName&gt;&lt;InstanceName&gt;Inbound&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.ConvertBitsToMb</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance02cd04bb6eb141c49a6bca6332f09011" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Perf.Node.Network.Outbound</Id>
+        <DisplayName>Node Network Outbound Rule</DisplayName>
+        <Description>Collect Isilon Node Outbound Network (Mb/s)</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Node</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeNetworkPerf.nodeNetworkOutBitsPerSecond.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.2.2.2.4.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Node&lt;/ObjectName&gt;&lt;CounterName&gt;Network&lt;/CounterName&gt;&lt;InstanceName&gt;Outbound&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.ConvertBitsToMb</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance27cad988af0b47b38b783bf2e67fbb0e" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Cluster.Filesystem.Inbound</Id>
+        <DisplayName>Cluster Filesystem Inbound Rule</DisplayName>
+        <Description>Collect Isilon Cluster Inbound Filesystem Throughput </Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Cluster</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Cluster"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.cluster.clusterPerformance.clusterIfsPerf.clusterIfsInBitsPerSecond.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.1.2.1.2.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Cluster&lt;/ObjectName&gt;&lt;CounterName&gt;FileSystem&lt;/CounterName&gt;&lt;InstanceName&gt;Inbound&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.ConvertBitsToMb</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance1ad123ad444c4259a5729fc8ddde8d0c" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Perf.Node.Filesystem.Inbound</Id>
+        <DisplayName>Node Filesystem Inbound Rule</DisplayName>
+        <Description>Collect Isilon Node Inbound Filesystem Throughput </Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Node</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeIfsPerf.nodeIfsInBitsPerSecond.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.2.2.1.2.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Node&lt;/ObjectName&gt;&lt;CounterName&gt;FileSystem&lt;/CounterName&gt;&lt;InstanceName&gt;Inbound&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.ConvertBitsToMb</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instancef783e4cfacda4fd59e78dbbc58645e90" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Cluster.CPU.Usage</Id>
+        <DisplayName>Cluster CPU Usage Rule</DisplayName>
+        <Description>Collect Isilon Cluster CPU Usage (%)</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Cluster</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Cluster"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.cluster.clusterPerformance.clusterCPUPerf.clusterCPUIdlePct.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.1.2.3.5.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Cluster&lt;/ObjectName&gt;&lt;CounterName&gt;CPU Usage&lt;/CounterName&gt;&lt;InstanceName&gt;&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.CpuPercentage</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instancee8cf0ab896934d81bd2708b9e112dd14" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Perf.Disk.Read</Id>
+        <DisplayName>Disk Read Rule</DisplayName>
+        <Description>Collects Disk Read Bandwidth</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Disk</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;ReadOrWrite&gt;Read&lt;/ReadOrWrite&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.DiskIO</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance5824250677b24974ab042bd62c3a1f2d" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Perf.Disk.Write</Id>
+        <DisplayName>Disk Write Rule</DisplayName>
+        <Description>Collects Disk Write Bandwidth</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Disk</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;ReadOrWrite&gt;Write&lt;/ReadOrWrite&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.DiskIO</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance420030ff401448188aa1cb40e2a00c85" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Node.TemperatureSensor</Id>
+        <DisplayName>Node Temperature Sensor Rule</DisplayName>
+        <Description>Collect Isilon Node Temperature</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.TempSensor</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Host/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.node.tempSensorTable.tempSensorEntry.tempSensorValue --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.2.54.1.4.$Target/Property[Type="AP.Isilon.TempSensor"]/Index$&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Node&lt;/ObjectName&gt;&lt;CounterName&gt;Temperature&lt;/CounterName&gt;&lt;InstanceName&gt;$Target/Property[Type="AP.Isilon.TempSensor"]/Name$&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.SingleValue.SNMP</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance928a245531e74971b469f67e210e6712" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Disk.IOPs</Id>
+        <DisplayName>DIsk IOPs Rule</DisplayName>
+        <Description>Collect Isilon Disk IOPs</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Disk</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Host/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.diskPerfTable.diskPerfEntry.diskPerfOpsPerSecond --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.2.2.52.1.3.$Target/Property[Type="AP.Isilon.Disk"]/Index$&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Disk&lt;/ObjectName&gt;&lt;CounterName&gt;IOPs&lt;/CounterName&gt;&lt;InstanceName&gt;&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.SingleValue.SNMP</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance8c8378737dee4b0993f9c8dfc0827c8a" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Protocol.IOPs</Id>
+        <DisplayName>Protocol IOPs Rule</DisplayName>
+        <Description>Collect Isilon Protocol IOPs</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Protocol</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Host/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeProtocolPerfTable.nodeProtocolPerfEntry.protocolOpsPerSecond --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.2.2.10.1.3$Target/Property[Type="AP.Isilon.Protocol"]/OidSuffix$&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Protocol&lt;/ObjectName&gt;&lt;CounterName&gt;IOPs&lt;/CounterName&gt;&lt;InstanceName&gt;&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.SingleValue.SNMP</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instancedb2869f6dc1543c5ba4e3d8427367c2b" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Perf.Node.Network.Inbound</Id>
+        <DisplayName>Node Network Inbound Rule</DisplayName>
+        <Description>Collect Isilon Node Inbound Network (Mb/s)</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Node</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;Community&gt;$Target/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;SnmpVarBinds&gt;&lt;SnmpVarBind&gt;&lt;!-- .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeNetworkPerf.nodeNetworkInBitsPerSecond.0 --&gt;&lt;OID&gt;.1.3.6.1.4.1.12124.2.2.2.2.0&lt;/OID&gt;&lt;Syntax&gt;0&lt;/Syntax&gt;&lt;Value VariantType="8" /&gt;&lt;/SnmpVarBind&gt;&lt;/SnmpVarBinds&gt;&lt;ObjectName&gt;Node&lt;/ObjectName&gt;&lt;CounterName&gt;Network&lt;/CounterName&gt;&lt;InstanceName&gt;Inbound&lt;/InstanceName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.ConvertBitsToMb</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instanceb7bf270b1d1548d9a221013e5d19e7bc" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Protocol.Network.Outbound</Id>
+        <DisplayName>Protocol Network Outbound Rule</DisplayName>
+        <Description>Collect Isilon Protocol Outbound Network</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Protocol</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;InOrOut&gt;Outbound&lt;/InOrOut&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.Protocol.NetworkInOut</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+    <Instance ID="Instance4e6455cef99c4d0ead5be60633b34857" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.PerformanceCollectionRule" Version="1.0.0.0">
+      <PerformanceCollectionRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Perf.Protocol.Network.Inbound</Id>
+        <DisplayName>Protocol Network Inbound Rule</DisplayName>
+        <Description>Collect Isilon Protocol Inbound Network</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>AP.Isilon.Protocol</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;InOrOut&gt;Inbound&lt;/InOrOut&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Performance.Protocol.NetworkInOut</DataSourceType>
+        <CollectToDB>true</CollectToDB>
+        <CollectToDW>true</CollectToDW>
+      </PerformanceCollectionRuleConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

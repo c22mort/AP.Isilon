@@ -1,0 +1,115 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <KnowledgeArticles>
+
+        <!-- AP.Isilon.Disk.Discovery -->
+        <KnowledgeArticle ElementID="AP.Isilon.Disk.Discovery" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Disk Discovery, uses SNMP to discover Disks in an Isilon Node.
+                Note : Disk Size is Converted from Bytes to Gb.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.52.1.1 - .iso.org.dod.internet.private.enterprises.isilon.node.diskTable.diskEntry.diskBay</para>
+                </listItem>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.52.1.4.DiskIndex - .iso.org.dod.internet.private.enterprises.isilon.node.diskTable.diskEntry.diskDeviceName</para>
+                </listItem>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.52.1.6.DiskIndex - .iso.org.dod.internet.private.enterprises.isilon.node.diskTable.diskEntry.diskModel</para>
+                </listItem>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.52.1.7.DiskIndex - .iso.org.dod.internet.private.enterprises.isilon.node.diskTable.diskEntry.diskSerialNumber</para>
+                </listItem>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.52.1.8.DiskIndex - .iso.org.dod.internet.private.enterprises.isilon.node.diskTable.diskEntry.diskFirmwareVersion</para>
+                </listItem>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.52.1.9.DiskIndex - .iso.org.dod.internet.private.enterprises.isilon.node.diskTable.diskEntry.diskSizeBytes</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Protocol.Discovery-->
+        <KnowledgeArticle ElementID="AP.Isilon.Protocol.Discovery" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Protocol Discovery, uses SNMP to discover protocols on an Isilon Node.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.10.1.1 - .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeProtocolPerfTable.nodeProtocolPerfEntry.protocolName</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Licence.Discovery -->
+        <KnowledgeArticle ElementID="AP.Isilon.Licence.Discovery" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Licence Discovery, uses SNMP via a Powershell Script to discover licences on an Isilon Cluster.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.5.1.1.2 - .iso.org.dod.internet.private.enterprises.isilon.cluster.licenses.licenseTable.licenseEntry.licenseModuleName</para>
+                </listItem>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.5.1.1.3 - .iso.org.dod.internet.private.enterprises.isilon.cluster.licenses.licenseTable.licenseEntry.licenseModuleStatus</para>
+                </listItem>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.5.1.1.4 - .iso.org.dod.internet.private.enterprises.isilon.cluster.licenses.licenseTable.licenseEntry.licenseModuleExpirationDate</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Licence.Discovery -->
+        <KnowledgeArticle ElementID="AP.Isilon.AmbientTempSensor.Discovery" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Node Ambient Temperature Sensor Discovery, uses SNMP via a Powershell Script to discover Ambient Temperature Sensor on an Isilon Node.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.54.1.2 - .iso.org.dod.internet.private.enterprises.isilon.node.tempSensorTable.tempSensorEntry.tempSensorName</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+      </KnowledgeArticles>
+    </LanguagePack>
+  </LanguagePacks> 
+</ManagementPackFragment>

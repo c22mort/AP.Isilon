@@ -1,0 +1,105 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <MonitorTypes>
+      <UnitMonitorType ID="AP.Isilon.Monitor.Ping.Test" Accessibility="Public">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="DeviceOkay" NoDetection="false" />
+          <MonitorTypeState ID="DeviceDown" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>System!System.ExpressionEvaluatorSchema</SchemaType>
+            <SchemaType>SNMP!System.SnmpVarBindsSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="IPAddress" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+              <Scheduler>
+                <SimpleReccuringSchedule>
+                  <Interval>$Config/IntervalSeconds$</Interval>
+                  <SpreadInitializationOverInterval Unit="Seconds">$Config/IntervalSeconds$</SpreadInitializationOverInterval>
+                </SimpleReccuringSchedule>
+                <ExcludeDates />
+              </Scheduler>
+            </DataSource>
+            <ProbeAction ID="ScriptProbePS" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+              <ScriptName>TestConnection.ps1</ScriptName>
+              <ScriptBody>$IncludeFileContent/Scripts/TestConnection.ps1$</ScriptBody>
+              <SnapIns />
+              <Parameters>
+                <Parameter>
+                  <Name>IPAddress</Name>
+                  <Value>$Config/IPAddress$</Value>
+                </Parameter>
+              </Parameters>
+              <TimeoutSeconds>60</TimeoutSeconds>
+            </ProbeAction>
+            <ConditionDetection ID="OkayFilterCondition" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="Integer">Property[@Name="IsAlive"]</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="Integer">1</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="DownFilterCondition" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="Integer">Property[@Name="IsAlive"]</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="Integer">0</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="DeviceOkay">
+              <Node ID="OkayFilterCondition">
+                <Node ID="ScriptProbePS">
+                  <Node ID="Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="DeviceDown">
+              <Node ID="DownFilterCondition">
+                <Node ID="ScriptProbePS">
+                  <Node ID="Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+    </MonitorTypes>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon.Monitor.Ping.Test">
+          <Name>Isilon Ping Test</Name>
+          <Description>Performs 3 Pings against a give IP Address, if any of the 3 pings respond then we assume the IP Address is Alive</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.Ping.Test" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

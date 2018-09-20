@@ -1,0 +1,72 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      <DataSourceModuleType ID="AP.Isilon.DataSource.SNMP.Walk" Accessibility="Public" Batching="false">
+        <Configuration>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="NoOfRetries" type="xsd:unsignedInt" default="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Timeout " type="xsd:unsignedInt" default="500" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="IP" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Community" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="OID" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval>$Config/IntervalSeconds$</Interval>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="Probe" TypeID="SNL!System.NetworkManagement.SnmpProbe">
+                <Walk>true</Walk>
+                <WalkReturnMultipleItems>true</WalkReturnMultipleItems>
+                <NoOfRetries>$Config/NoOfRetries$</NoOfRetries>
+                <Timeout>$Config/Timeout$</Timeout>
+                <Port>161</Port>
+                <IsWriteAction>false</IsWriteAction>
+                <IP>$Config/IP$</IP>                
+                <CommunityString>$Config/Community$</CommunityString>
+                <Version>2</Version>
+                <SnmpVarBinds>
+                  <SnmpVarBind>
+                    <OID>$Config/OID$</OID>
+                    <Syntax>0</Syntax>
+                    <Value VariantType="8" />
+                  </SnmpVarBind>
+                </SnmpVarBinds>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Probe">
+                <Node ID="Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>SNMP!System.SnmpData</OutputType>
+      </DataSourceModuleType>
+    </ModuleTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon.DataSource.SNMP.Walk">
+          <Name>SNMP Walk Data Source</Name>
+          <Description>Performs an SNMP Walk on Given OID (Cookdown)</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.DataSource.SNMP.Walk" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+
+</ManagementPackFragment>

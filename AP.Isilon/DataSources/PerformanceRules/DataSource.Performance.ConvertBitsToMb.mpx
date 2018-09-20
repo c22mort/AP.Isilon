@@ -1,0 +1,102 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      <DataSourceModuleType ID="AP.Isilon.DataSource.Performance.ConvertBitsToMb" Accessibility="Public" Batching="false">
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>System!System.ParamListSchema</SchemaType>
+            <SchemaType>System!System.ExpressionEvaluatorSchema</SchemaType>
+            <SchemaType>SNMP!System.SnmpVarBindsSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="NoOfRetries" type="xsd:unsignedInt" default="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Timeout " type="xsd:unsignedInt" default="500" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="IP" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Community" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="SnmpVarBinds" type="SnmpVarBindsType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ObjectName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CounterName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="InstanceName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="NoOfRetries" Selector="$Config/NoOfRetries$" ParameterType="int" />
+          <OverrideableParameter ID="Timeout" Selector="$Config/Timeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="SnmpDataSource" TypeID="SNL!System.NetworkManagement.SnmpDataSource">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval Unit="Seconds">$Config/IntervalSeconds$</Interval>
+                    <SpreadInitializationOverInterval Unit="Seconds">$Config/IntervalSeconds$</SpreadInitializationOverInterval>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+                <NoOfRetries>$Config/NoOfRetries$</NoOfRetries>
+                <Timeout>$Config/Timeout$</Timeout>
+                <Port>161</Port>
+                <IP>$Config/IP$</IP>
+                <CommunityString>$Config/Community$</CommunityString>
+                <Version>2</Version>
+                <SnmpVarBinds>$Config/SnmpVarBinds$</SnmpVarBinds>
+                <OutputOnError>false</OutputOnError>
+              </DataSource>
+              <ProbeAction ID="ScriptProbePS" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+                <ScriptName>ConvertBitsToMb.ps1</ScriptName>
+                <ScriptBody>$IncludeFileContent/Scripts/ConvertBitsToMb.ps1$</ScriptBody>
+                <SnapIns />
+                <Parameters>
+                  <Parameter>
+                    <Name>Number</Name>
+                    <Value>$Data/SnmpVarBinds/SnmpVarBind[1]/Value$</Value>
+                  </Parameter>
+                </Parameters>
+                <TimeoutSeconds>60</TimeoutSeconds>
+              </ProbeAction>
+              <ConditionDetection ID="Mapper" TypeID="Perf!System.Performance.DataGenericMapper">
+                <ObjectName>$Config/ObjectName$</ObjectName>
+                <CounterName>$Config/CounterName$</CounterName>
+                <InstanceName>$Config/InstanceName$</InstanceName>
+                <Value>$Data/Property[@Name="Number"]$</Value>
+              </ConditionDetection>
+            </MemberModules>
+            <Composition>
+              <Node ID="Mapper">
+                <Node ID="ScriptProbePS">
+                  <Node ID="SnmpDataSource" />
+                </Node>
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>Perf!System.Performance.Data</OutputType>
+      </DataSourceModuleType>
+
+    </ModuleTypes>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon.DataSource.Performance.ConvertBitsToMb">
+          <Name>Converts Bits to Mbits</Name>
+          <Description>Converts Bits to Mbits</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.DataSource.Performance.ConvertBitsToMb" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.DataSource.Performance.ConvertBitsToMb" SubElementID="NoOfRetries">
+          <Name>Number of Retries</Name>
+          <Description>Number of times that the request should be retried if the first request fails.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.DataSource.Performance.ConvertBitsToMb" SubElementID="Timeout">
+          <Name>Timeout</Name>
+          <Description>Seconds that the request must be complete before it is terminated.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

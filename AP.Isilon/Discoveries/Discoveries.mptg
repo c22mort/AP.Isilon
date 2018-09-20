@@ -1,0 +1,116 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance700bdde902584a75b03226b9c9ae0284" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+      <DiscoveryConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Licence.Discovery</Id>
+        <DisplayName>Isilon Licence Discovery</DisplayName>
+        <Description>Discover Cluster Licences via SNMP</Description>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;14400&lt;/IntervalSeconds&gt;&lt;SpreadInterval&gt;1800&lt;/SpreadInterval&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Licence.Discovey</DataSourceType>
+        <Target>AP.Isilon.Cluster</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Category>Discovery</Category>
+        <DiscoveryClasses>
+          <DiscoveryClassItem>
+            <TypeId>AP.Isilon.Licence</TypeId>
+            <Properties />
+          </DiscoveryClassItem>
+        </DiscoveryClasses>
+        <DiscoveryRelationships>
+          <DiscoveryRelationshipItem>
+            <TypeId>AP.Isilon.ClusterHostsLicence</TypeId>
+            <Properties />
+          </DiscoveryRelationshipItem>
+        </DiscoveryRelationships>
+      </DiscoveryConfig>
+    </Instance>
+    <Instance ID="Instancebdd1bbde48904ab498f07b54d81df785" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+      <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>AmbientTempSensor.Discovery</Id>
+        <DisplayName>Isilon AmbientTempSensor Discovery</DisplayName>
+        <Description>Discover Nodes Ambient Temperature Sensor</Description>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;14400&lt;/IntervalSeconds&gt;&lt;SpreadInterval&gt;1800&lt;/SpreadInterval&gt;&lt;ClusterName&gt;$Target/Host/Property[Type="AP.Isilon.Cluster"]/Name$&lt;/ClusterName&gt;&lt;NodeName&gt;$Target/Property[Type="AP.Isilon.Node"]/Name$&lt;/NodeName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.AmbientTempSensor.Discovey</DataSourceType>
+        <Target>AP.Isilon.Node</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Category>Discovery</Category>
+        <DiscoveryClasses>
+          <DiscoveryClassItem>
+            <TypeId>AP.Isilon.TempSensor</TypeId>
+            <Properties />
+          </DiscoveryClassItem>
+        </DiscoveryClasses>
+        <DiscoveryRelationships>
+          <DiscoveryRelationshipItem>
+            <TypeId>AP.Isilon.NodeHostsTempSensors</TypeId>
+            <Properties />
+          </DiscoveryRelationshipItem>
+        </DiscoveryRelationships>
+      </DiscoveryConfig>
+    </Instance>
+    <Instance ID="Instanceaa383f36c2cb4062a3a96f4d09adc5b6" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+      <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Protocol.Discovery</Id>
+        <DisplayName>Isilon Protocol Discovery</DisplayName>
+        <Description>Discover Nodes Protocols via SNMP</Description>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;14400&lt;/IntervalSeconds&gt;&lt;SpreadInterval&gt;1800&lt;/SpreadInterval&gt;&lt;ClusterName&gt;$Target/Host/Property[Type="AP.Isilon.Cluster"]/Name$&lt;/ClusterName&gt;&lt;NodeName&gt;$Target/Property[Type="AP.Isilon.Node"]/Name$&lt;/NodeName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Protocol.Discovey</DataSourceType>
+        <Target>AP.Isilon.Node</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Category>Discovery</Category>
+        <DiscoveryClasses>
+          <DiscoveryClassItem>
+            <TypeId>AP.Isilon.Protocol</TypeId>
+            <Properties />
+          </DiscoveryClassItem>
+        </DiscoveryClasses>
+        <DiscoveryRelationships>
+          <DiscoveryRelationshipItem>
+            <TypeId>AP.Isilon.NodeHostsProtocols</TypeId>
+            <Properties />
+          </DiscoveryRelationshipItem>
+        </DiscoveryRelationships>
+      </DiscoveryConfig>
+    </Instance>
+    <Instance ID="Instanceec1e2a462f80419e8f7806fd2608ee3c" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+      <DiscoveryConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Disk.Discovery</Id>
+        <DisplayName>Isilon Disk Discovery</DisplayName>
+        <Description>Discover Nodes Disks via SNMP (Converts Disk Size to Gb)</Description>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;14400&lt;/IntervalSeconds&gt;&lt;SpreadInterval&gt;1800&lt;/SpreadInterval&gt;&lt;ClusterName&gt;$Target/Host/Property[Type="AP.Isilon.Cluster"]/Name$&lt;/ClusterName&gt;&lt;NodeName&gt;$Target/Property[Type="AP.Isilon.Node"]/Name$&lt;/NodeName&gt;</DataSourceConfig>
+        <DataSourceType>AP.Isilon.DataSource.Disk.Discovey</DataSourceType>
+        <Target>AP.Isilon.Node</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Category>Discovery</Category>
+        <DiscoveryClasses>
+          <DiscoveryClassItem>
+            <TypeId>AP.Isilon.Disk</TypeId>
+            <Properties />
+          </DiscoveryClassItem>
+        </DiscoveryClasses>
+        <DiscoveryRelationships>
+          <DiscoveryRelationshipItem>
+            <TypeId>AP.Isilon.NodeHostsDisks</TypeId>
+            <Properties />
+          </DiscoveryRelationshipItem>
+        </DiscoveryRelationships>
+      </DiscoveryConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

@@ -1,0 +1,84 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+
+        <!-- AP.Isilon.Disk -->
+        <ClassType ID="AP.Isilon.Disk" Base="System!System.LogicalEntity" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">          
+          <Property ID="Index" Key="false" Type="int" />
+          <Property ID="Name" Key="true" Type="string" />
+          <Property ID="DeviceName" Key="false" Type="string" />
+          <Property ID="ModelNumber" Key="false" Type="string" />
+          <Property ID="SerialNumber" Key="false" Type="string" />
+          <Property ID="FirmwareVersion" Key="false" Type="string" />
+          <Property ID="Size" Key="false" Type="string" />
+        </ClassType>
+      
+      </ClassTypes>
+      
+      <RelationshipTypes>
+
+        <!-- AP.Isilon.NodeHostsDisks -->
+        <RelationshipType ID="AP.Isilon.NodeHostsDisks" Abstract="false" Accessibility="Public" Base="System!System.Hosting">
+          <Source ID="Source" Type="AP.Isilon.Node"/>
+          <Target ID="Target" Type="AP.Isilon.Disk" />
+        </RelationshipType>
+
+      </RelationshipTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+
+        <!-- AP.Isilon.Disk -->
+        <DisplayString ElementID="AP.Isilon.Disk">
+          <Name>AP Isilon Disk</Name>
+          <Description>AP Isilon Disk Class</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Disk : Index -->
+        <DisplayString ElementID="AP.Isilon.Disk" SubElementID="Index">
+          <Name>Index</Name>
+          <Description>Index of Isilon Disk (Used for SNMP Offset)</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Disk : Name -->
+        <DisplayString ElementID="AP.Isilon.Disk" SubElementID="Name">
+          <Name>Name</Name>
+          <Description>The friendly name for this disk</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Disk : Name -->
+        <DisplayString ElementID="AP.Isilon.Disk" SubElementID="DeviceName">
+          <Name>Device Name</Name>
+          <Description>The local isilon nodes device name for this disk</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Disk : ModelNumber -->
+        <DisplayString ElementID="AP.Isilon.Disk" SubElementID="ModelNumber">
+          <Name>Model Number</Name>
+          <Description>The manufacture and model name of the disk</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Disk : SerialNumber -->
+        <DisplayString ElementID="AP.Isilon.Disk" SubElementID="SerialNumber">
+          <Name>Serial Number</Name>
+          <Description>The serial number of the disk</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Disk : FirmwareVersion -->
+        <DisplayString ElementID="AP.Isilon.Disk" SubElementID="FirmwareVersion">
+          <Name>Firmware Version</Name>
+          <Description>The firmware version installed on the disk</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Disk : Size -->
+        <DisplayString ElementID="AP.Isilon.Disk" SubElementID="Size">
+          <Name>Disk Size</Name>
+          <Description>Size of Isilon Disk in Gb</Description>
+        </DisplayString>
+
+        <!-- AP.Isilon.NodeHostsDisks -->
+        <DisplayString ElementID="AP.Isilon.NodeHostsDisks">
+          <Name>Node Hosts Disks</Name>
+          <Description>Defines Hosting Relationship between Nodes and Disks</Description>
+        </DisplayString>
+
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

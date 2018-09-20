@@ -1,0 +1,79 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+
+        <!-- AP.Isilon.Node Class, based on System.NetworkManagement.LogicalDevice -->
+        <ClassType ID="AP.Isilon.Node" Base="System!System.LogicalEntity" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">
+          <Property ID="Index" Key="false" Type="int" />
+          <Property ID="Name" Key="true" Type="string"/>
+          <Property ID="IsilonNodeName" Key="false" Type="string"/>
+          <Property ID="IPAddress" Key="false" Type="string"/>
+          <Property ID="Type" Key="false" Type="string"/>
+          <Property ID="ReadOnly" Key="false" Type="bool"/>
+        </ClassType>
+                
+      </ClassTypes>
+
+      <RelationshipTypes>
+
+        <!-- Cluster -> Nodes Relationship -->
+        <RelationshipType ID="AP.Isilon.ClusterHostsNodes" Abstract="false" Accessibility="Public" Base="System!System.Hosting">
+          <Source ID="Source" Type="AP.Isilon.Cluster"/>
+          <Target ID="Target" Type="AP.Isilon.Node"/>
+        </RelationshipType>
+        
+      </RelationshipTypes>
+      
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+
+        <!-- AP.Isilon.Node -->
+        <DisplayString ElementID="AP.Isilon.Node">
+          <Name>AP Isilon Node</Name>
+          <Description>AP Isilon Node Class</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Node : Index -->
+        <DisplayString ElementID="AP.Isilon.Node" SubElementID="Index">
+          <Name>Node Index</Name>
+          <Description>Index of this EMC Isilon Node</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Node : Name -->
+        <DisplayString ElementID="AP.Isilon.Node" SubElementID="Name">
+          <Name>Node Name</Name>
+          <Description>Name of this EMC Isilon Node (Used as a Key for node Creation, in case Node isn't available for SNMP)</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Node : IsilonNodeName -->
+        <DisplayString ElementID="AP.Isilon.Node" SubElementID="IsilonNodeName">
+          <Name>Isilon Node Name</Name>
+          <Description>Internal Cluster Name of this EMC Isilon Node</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Node : IPAddress -->
+        <DisplayString ElementID="AP.Isilon.Node" SubElementID="IPAddress">
+          <Name>IPAddress</Name>
+          <Description>IPAddress used for monitoring of this EMC Isilon Node</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Node : Type -->
+        <DisplayString ElementID="AP.Isilon.Node" SubElementID="Type">
+          <Name>Type</Name>
+          <Description>Type of this EMC Isilon Node, (Storage or Accelerator)</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Node : ReadOnly -->
+        <DisplayString ElementID="AP.Isilon.Node" SubElementID="ReadOnly">
+          <Name>Read Only</Name>
+          <Description>Is this EMC Isilon Node Read-Only</Description>
+        </DisplayString>
+
+        <!-- AP.Isilon.ClusterHostsNode -->
+        <DisplayString ElementID="AP.Isilon.ClusterHostsNodes">
+          <Name>Isilon Cluster Hosts Nodes</Name>
+          <Description>Defines Hosting Relationship between Clusters and Nodes</Description>
+        </DisplayString>
+        
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

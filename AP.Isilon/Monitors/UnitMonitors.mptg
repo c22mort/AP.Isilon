@@ -1,0 +1,345 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instancea21966c668e04d72a4266801f9e78b51" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <MonitorType>AP.Isilon.Monitor.NetworkInterface.Health.SNMP</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;IP&gt;$Target/Host/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;Community&gt;$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>NetworkInterfaceUp</OperationalStateId>
+            <OperationalStateDisplayName>NetworkInterfaceUp</OperationalStateDisplayName>
+            <MonitorTypeStateId>NetworkInterfaceUp</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>NetworkInterfaceDormant</OperationalStateId>
+            <OperationalStateDisplayName>NetworkInterfaceDormant</OperationalStateDisplayName>
+            <MonitorTypeStateId>NetworkInterfaceDormant</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>NetworkInterfaceDown</OperationalStateId>
+            <OperationalStateDisplayName>NetworkInterfaceDown</OperationalStateDisplayName>
+            <MonitorTypeStateId>NetworkInterfaceDown</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.PerformanceState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Monitor.NetworkInterface.Health</Id>
+        <DisplayName>Monitor Network Interface Health</DisplayName>
+        <Description>Monitors Network Interface Health via SNMP</Description>
+        <Target>AP.Isilon.NetworkInterface</Target>
+        <Enabled>true</Enabled>
+        <Category>PerformanceHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertDescription>{0} : {1} : {2} has change HealthState, please log into the Isilon Cluster to view more info.
+$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Name$
+$Target/Host/Property[Type="AP.Isilon.Node"]/Name$
+$Target/Property[Type="AP.Isilon.NetworkInterface"]/Name$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instancea590cb242ade4283b810dfeef2569e9d" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AP.Isilon.Monitor.Licence.Health.Powershell</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>LicenceUnhealthy</OperationalStateId>
+            <OperationalStateDisplayName>LicenceUnhealthy</OperationalStateDisplayName>
+            <MonitorTypeStateId>LicenceUnhealthy</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>LicenceHealthy</OperationalStateId>
+            <OperationalStateDisplayName>LicenceHealthy</OperationalStateDisplayName>
+            <MonitorTypeStateId>LicenceHealthy</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Monitor.Licence.Health</Id>
+        <DisplayName>Monitor Licence Health</DisplayName>
+        <Description>Monitors Licence Health</Description>
+        <Target>AP.Isilon.Licence</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertDescription>{0} : {1} has change HealthState, please log into the Isilon Cluster to view more info.
+$Target/Host/Property[Type="AP.Isilon.Cluster"]/Name$
+$Target/Property[Type="AP.Isilon.Licence"]/Name$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance71668d243e7d42d696ac129c7a9788a3" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AP.Isilon.Monitor.Ping.Test</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;IPAddress&gt;$Target/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IPAddress&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>DeviceOkay</OperationalStateId>
+            <OperationalStateDisplayName>DeviceOkay</OperationalStateDisplayName>
+            <MonitorTypeStateId>DeviceOkay</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>DeviceDown</OperationalStateId>
+            <OperationalStateDisplayName>DeviceDown</OperationalStateDisplayName>
+            <MonitorTypeStateId>DeviceDown</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Monitor.Node.PingTest</Id>
+        <DisplayName>Monitor Node Ping Test</DisplayName>
+        <Description>Performs a Ping Test against an Isilon Node</Description>
+        <Target>AP.Isilon.Node</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertDescription>{0} : {1} has failed a Ping Test, it's possible that the node has changed IP Address within a pool. Try re-running AP.Isilon.Discovery or log into the Isilon Cluster to view more info.
+$Target/Host/Property[Type="AP.Isilon.Cluster"]/Name$
+$Target/Property[Type="AP.Isilon.Node"]/Name$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instancecf2e83458e2b464182489988e3c7e089" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AP.Isilon.Monitor.Protocol.Health.SNMP</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;IP&gt;$Target/Host/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;Community&gt;$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;LowerThreshold&gt;10000&lt;/LowerThreshold&gt;&lt;HigherThreshold&gt;15000&lt;/HigherThreshold&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>ProtocolHealthy</OperationalStateId>
+            <OperationalStateDisplayName>ProtocolHealthy</OperationalStateDisplayName>
+            <MonitorTypeStateId>ProtocolHealthy</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>ProtocolWarning</OperationalStateId>
+            <OperationalStateDisplayName>ProtocolWarning</OperationalStateDisplayName>
+            <MonitorTypeStateId>ProtocolWarning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>ProtocolCritical</OperationalStateId>
+            <OperationalStateDisplayName>ProtocolCritical</OperationalStateDisplayName>
+            <MonitorTypeStateId>ProtocolCritical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.PerformanceState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Monitor.Protocol.Health</Id>
+        <DisplayName>Monitor Protocol Health</DisplayName>
+        <Description>Monitors Nodes Protocol Health via SNMP (Average Latency)</Description>
+        <Target>AP.Isilon.Protocol</Target>
+        <Enabled>true</Enabled>
+        <Category>PerformanceHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertDescription>{0} : {1} : {2} Protocol has change HealthState, Average latency has Changed, please Check Isilon Cluster.
+$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Name$
+$Target/Host/Property[Type="AP.Isilon.Node"]/Name$
+$Target/Property[Type="AP.Isilon.Protocol"]/Name$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance7069961d0a0443b8af9777cc9502a89b" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AP.Isilon.Monitor.Node.Health.SNMP</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;Community&gt;$Target/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>NodeOkay</OperationalStateId>
+            <OperationalStateDisplayName>NodeOkay</OperationalStateDisplayName>
+            <MonitorTypeStateId>NodeOkay</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>NodeWarning</OperationalStateId>
+            <OperationalStateDisplayName>NodeWarning</OperationalStateDisplayName>
+            <MonitorTypeStateId>NodeWarning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>NodeDown</OperationalStateId>
+            <OperationalStateDisplayName>NodeDown</OperationalStateDisplayName>
+            <MonitorTypeStateId>NodeDown</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Monitor.Node.Health</Id>
+        <DisplayName>Monitor Node Health</DisplayName>
+        <Description>Monitors Node Health via SNMP</Description>
+        <Target>AP.Isilon.Node</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertDescription>{0} has change HealthState, please log into the Isilon Cluster to view more info.
+$Target/Property[Type="AP.Isilon.Node"]/Name$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance22f68ec7beaa4612ab1bf1335eb53e0b" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AP.Isilon.Monitor.TempSensor.Health.SNMP</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;IP&gt;$Target/Host/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;Community&gt;$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;&lt;TemperatureLow&gt;30&lt;/TemperatureLow&gt;&lt;TemperatureHigh&gt;37&lt;/TemperatureHigh&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>TemperatureHealthy</OperationalStateId>
+            <OperationalStateDisplayName>TemperatureHealthy</OperationalStateDisplayName>
+            <MonitorTypeStateId>TemperatureHealthy</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>TemperatureWarning</OperationalStateId>
+            <OperationalStateDisplayName>TemperatureWarning</OperationalStateDisplayName>
+            <MonitorTypeStateId>TemperatureWarning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>TemperatureCritical</OperationalStateId>
+            <OperationalStateDisplayName>TemperatureCritical</OperationalStateDisplayName>
+            <MonitorTypeStateId>TemperatureCritical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.PerformanceState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Monitor.TempSensor.Health</Id>
+        <DisplayName>Monitor Temperature Sensor Health</DisplayName>
+        <Description>Monitors Isilon Node Ambient Temperature Health</Description>
+        <Target>AP.Isilon.TempSensor</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertDescription>{0} : {1} : {2} has Changed HealthState, please check Data Centre Temperature
+$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Name$
+$Target/Host/Property[Type="AP.Isilon.Node"]/Name$
+$Target/Property[Type="AP.Isilon.TempSensor"]/Name$
+</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance1eaa75642fbb49dba8ea0661aa2dbf53" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <MonitorType>AP.Isilon.Monitor.Cluster.Health.SNMP</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;IP&gt;$Target/Property[Type="AP.Isilon.Cluster"]/IPAddress$&lt;/IP&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;Community&gt;$Target/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>ClusterOkay</OperationalStateId>
+            <OperationalStateDisplayName>ClusterOkay</OperationalStateDisplayName>
+            <MonitorTypeStateId>ClusterOkay</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>ClusterWarning</OperationalStateId>
+            <OperationalStateDisplayName>ClusterWarning</OperationalStateDisplayName>
+            <MonitorTypeStateId>ClusterWarning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>ClusterDown</OperationalStateId>
+            <OperationalStateDisplayName>ClusterDown</OperationalStateDisplayName>
+            <MonitorTypeStateId>ClusterDown</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Monitor.Cluster.Health</Id>
+        <DisplayName>Monitor Cluster Health</DisplayName>
+        <Description>Monitors Cluster Health via SNMP</Description>
+        <Target>AP.Isilon.Cluster</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertDescription>{0} has change HealthState, please log into the Isilon Cluster to view more info.
+$Target/Property[Type="AP.Isilon.Cluster"]/Name$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance3cbe9083d1144d98b0ef8e1403dc0ec0" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>AP.Isilon.Monitor.Disk.Health.SNMP</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;IP&gt;$Target/Host/Property[Type="AP.Isilon.Node"]/IPAddress$&lt;/IP&gt;&lt;NoOfRetries&gt;3&lt;/NoOfRetries&gt;&lt;Timeout&gt;120&lt;/Timeout&gt;&lt;Community&gt;$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Community$&lt;/Community&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>DiskHealthy</OperationalStateId>
+            <OperationalStateDisplayName>DiskHealthy</OperationalStateDisplayName>
+            <MonitorTypeStateId>DiskHealthy</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>DiskWarning</OperationalStateId>
+            <OperationalStateDisplayName>DiskWarning</OperationalStateDisplayName>
+            <MonitorTypeStateId>DiskWarning</MonitorTypeStateId>
+            <HealthState>Warning</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>DiskCritical</OperationalStateId>
+            <OperationalStateDisplayName>DiskCritical</OperationalStateDisplayName>
+            <MonitorTypeStateId>DiskCritical</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Monitor.Disk.Health</Id>
+        <DisplayName>Monitor Disk Health</DisplayName>
+        <Description>Monitors Disk Health</Description>
+        <Target>AP.Isilon.Disk</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Warning</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertDescription>{0} has change HealthState, please log into the Isilon Cluster to view more info.
+$Target/Host/Property[Type="AP.Isilon.Node"]/Name$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

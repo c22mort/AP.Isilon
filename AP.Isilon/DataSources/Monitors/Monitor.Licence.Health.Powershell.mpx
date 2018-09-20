@@ -1,0 +1,131 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <MonitorTypes>
+      <UnitMonitorType ID="AP.Isilon.Monitor.Licence.Health.Powershell" Accessibility="Public">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="LicenceHealthy" NoDetection="false" />
+          <MonitorTypeState ID="LicenceUnhealthy" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>System!System.ExpressionEvaluatorSchema</SchemaType>
+            <SchemaType>SNMP!System.SnmpVarBindsSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+              <Scheduler>
+                <SimpleReccuringSchedule>
+                  <Interval>$Config/IntervalSeconds$</Interval>
+                  <SpreadInitializationOverInterval>$Config/IntervalSeconds$</SpreadInitializationOverInterval>
+                </SimpleReccuringSchedule>
+                <ExcludeDates />
+              </Scheduler>
+            </DataSource>
+            <ProbeAction ID="ScriptProbePS" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+              <ScriptName>Monitor-IsilonLicences.ps1</ScriptName>
+              <ScriptBody>$IncludeFileContent/Scripts/Monitor-IsilonLicences.ps1$</ScriptBody>
+              <SnapIns />
+              <Parameters>
+                <Parameter>
+                  <Name>ClusterIP</Name>
+                  <Value>$Target/Host/Property[Type="AP.Isilon.Cluster"]/IPAddress$</Value>
+                </Parameter>
+                <Parameter>
+                  <Name>ClusterName</Name>
+                  <Value>$Target/Host/Property[Type="AP.Isilon.Cluster"]/Name$</Value>
+                </Parameter>
+                <Parameter>
+                  <Name>Community</Name>
+                  <Value>$Target/Host/Property[Type="AP.Isilon.Cluster"]/Community$</Value>
+                </Parameter>
+              </Parameters>
+              <TimeoutSeconds>300</TimeoutSeconds>
+            </ProbeAction>
+            <ConditionDetection ID="FilterOnLicenceName" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='LicenceName']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">$Target/Property[Type="AP.Isilon.Licence"]/Name$</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="LicenceHealthyFilterCondition" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='LicenceHealth']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">HEALTHY</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="LicenceUnhealthyFilterCondition" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='LicenceHealth']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">UNHEALTHY</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="LicenceHealthy">
+              <Node ID="LicenceHealthyFilterCondition">
+                <Node ID="FilterOnLicenceName">
+                  <Node ID="ScriptProbePS">
+                    <Node ID="Scheduler" />
+                  </Node>
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="LicenceUnhealthy">
+              <Node ID="LicenceUnhealthyFilterCondition">
+                <Node ID="FilterOnLicenceName">
+                  <Node ID="ScriptProbePS">
+                    <Node ID="Scheduler" />
+                  </Node>
+                </Node>
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+      
+    </MonitorTypes>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon.Monitor.Licence.Health.Powershell">
+          <Name>Isilon Disk Discovery</Name>
+          <Description>Discovers an Isilon Nodes Disks</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.Licence.Health.Powershell" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+
+</ManagementPackFragment>

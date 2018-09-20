@@ -1,0 +1,54 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+
+        <!-- AP.Isilon.Protocol -->
+        <ClassType ID="AP.Isilon.Protocol" Base="System!System.LogicalEntity" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">
+          <Property ID="Name" Key="true" Type="string" />
+          <Property ID="OidSuffix" Key="false" Type="string" />
+        </ClassType>
+          
+      </ClassTypes>
+    
+      <RelationshipTypes>
+
+        <!-- AP.Isilon.NodeHostsProtocols -->
+        <RelationshipType ID="AP.Isilon.NodeHostsProtocols" Abstract="false" Accessibility="Public" Base="System!System.Hosting">
+          <Source ID="Source" Type="AP.Isilon.Node" />
+          <Target ID="Target" Type="AP.Isilon.Protocol"/>
+        </RelationshipType>
+        
+      </RelationshipTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+
+        <!-- AP.Isilon.Protocol -->
+        <DisplayString ElementID="AP.Isilon.Protocol">
+          <Name>AP Isilon Protocol</Name>
+          <Description>AP Isilon Protocol Class</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Protocol : Name -->
+        <DisplayString ElementID="AP.Isilon.Protocol" SubElementID="Name">
+          <Name>Name</Name>
+          <Description>Name of Protocol</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Protocol : OidSuffix -->
+        <DisplayString ElementID="AP.Isilon.Protocol" SubElementID="OidSuffix">
+          <Name>SNMP OID Suffix</Name>
+          <Description>SNMP OID Siffix (used For Monitors and Rules)</Description>
+        </DisplayString>
+
+        <!-- AP.Isilon.NodeHostsProtocols -->
+        <DisplayString ElementID="AP.Isilon.NodeHostsProtocols">
+          <Name>AP Isilon Node Hosts protocols</Name>
+          <Description></Description>
+        </DisplayString>
+
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

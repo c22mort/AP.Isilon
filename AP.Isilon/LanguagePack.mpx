@@ -1,0 +1,24 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LanguagePacks>
+    
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon">
+          <Name>AP Isilon Management Pack</Name>
+          <Description>EMC Isilon Management back by A.Patrick</Description>
+        </DisplayString>
+      </DisplayStrings>
+
+      <KnowledgeArticles>
+        <KnowledgeArticle ElementID="AP.Isilon" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>AP.Isilon</title>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+      </KnowledgeArticles>
+    </LanguagePack>
+    
+  </LanguagePacks>  
+</ManagementPackFragment>

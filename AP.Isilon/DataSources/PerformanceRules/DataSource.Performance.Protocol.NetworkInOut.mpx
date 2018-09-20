@@ -1,0 +1,107 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      <DataSourceModuleType ID="AP.Isilon.DataSource.Performance.Protocol.NetworkInOut" Accessibility="Public" Batching="false">
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>System!System.ParamListSchema</SchemaType>
+            <SchemaType>System!System.ExpressionEvaluatorSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="InOrOut" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval Unit="Seconds">$Config/IntervalSeconds$</Interval>
+                    <SpreadInitializationOverInterval Unit="Seconds">$Config/IntervalSeconds$</SpreadInitializationOverInterval>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="ScriptProbePS" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+                <ScriptName>Get-IsilonProtocolNetworkInOut.ps1</ScriptName>
+                <ScriptBody>$IncludeFileContent/Scripts/Get-IsilonProtocolNetworkInOut.ps1$</ScriptBody>
+                <SnapIns />
+                <Parameters>
+                  <Parameter>
+                    <Name>ClusterName</Name>
+                    <Value>$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Name$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>NodeName</Name>
+                    <Value>$Target/Host/Property[Type="AP.Isilon.Node"]/Name$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>NodeIP</Name>
+                    <Value>$Target/Host/Property[Type="AP.Isilon.Node"]/IPAddress$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>Community</Name>
+                    <Value>$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Community$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>InOrOut</Name>
+                    <Value>$Config/InOrOut$</Value>
+                  </Parameter>
+                </Parameters>
+                <TimeoutSeconds>60</TimeoutSeconds>
+              </ProbeAction>
+              <ConditionDetection ID="FilterOnProtocolName" TypeID="System!System.ExpressionFilter">
+                <Expression>
+                  <SimpleExpression>
+                    <ValueExpression>
+                      <XPathQuery Type="String">Property[@Name='ProtocolName']</XPathQuery>
+                    </ValueExpression>
+                    <Operator>Equal</Operator>
+                    <ValueExpression>
+                      <Value Type="String">$Target/Property[Type="AP.Isilon.Protocol"]/Name$</Value>
+                    </ValueExpression>
+                  </SimpleExpression>
+                </Expression>
+              </ConditionDetection>
+              <ConditionDetection ID="Mapper" TypeID="Perf!System.Performance.DataGenericMapper">
+                <ObjectName>Protocol</ObjectName>
+                <CounterName>Network</CounterName>
+                <InstanceName>$Config/InOrOut$</InstanceName>
+                <Value>$Data/Property[@Name="Value"]$</Value>
+              </ConditionDetection>
+            </MemberModules>
+            <Composition>
+              <Node ID="Mapper">
+                <Node ID="FilterOnProtocolName">
+                  <Node ID="ScriptProbePS">
+                    <Node ID="Scheduler" />
+                  </Node>
+                </Node>
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>Perf!System.Performance.Data</OutputType>
+      </DataSourceModuleType>
+    </ModuleTypes>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon.DataSource.Performance.Protocol.NetworkInOut">
+          <Name>Protocol Network IO Performance Rule</Name>
+          <Description>Returns Protocol Network IO</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.DataSource.Performance.Protocol.NetworkInOut" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+
+</ManagementPackFragment>

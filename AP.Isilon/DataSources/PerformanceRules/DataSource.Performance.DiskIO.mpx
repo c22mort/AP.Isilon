@@ -1,0 +1,107 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      <DataSourceModuleType ID="AP.Isilon.DataSource.Performance.DiskIO" Accessibility="Public" Batching="false">
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>System!System.ParamListSchema</SchemaType>
+            <SchemaType>System!System.ExpressionEvaluatorSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="ReadOrWrite" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval Unit="Seconds">$Config/IntervalSeconds$</Interval>
+                    <SpreadInitializationOverInterval Unit="Seconds">$Config/IntervalSeconds$</SpreadInitializationOverInterval>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="ScriptProbePS" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+                <ScriptName>Get-IsilonDiskIO.ps1</ScriptName>
+                <ScriptBody>$IncludeFileContent/Scripts/Get-IsilonDiskIO.ps1$</ScriptBody>
+                <SnapIns />
+                <Parameters>
+                  <Parameter>
+                    <Name>ClusterName</Name>
+                    <Value>$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Name$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>NodeName</Name>
+                    <Value>$Target/Host/Property[Type="AP.Isilon.Node"]/Name$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>NodeIP</Name>
+                    <Value>$Target/Host/Property[Type="AP.Isilon.Node"]/IPAddress$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>Community</Name>
+                    <Value>$Target/Host/Host/Property[Type="AP.Isilon.Cluster"]/Community$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>ReadOrWrite</Name>
+                    <Value>$Config/ReadOrWrite$</Value>
+                  </Parameter>
+                </Parameters>
+                <TimeoutSeconds>60</TimeoutSeconds>
+              </ProbeAction>
+              <ConditionDetection ID="FilterOnDiskIndex" TypeID="System!System.ExpressionFilter">
+                <Expression>
+                  <SimpleExpression>
+                    <ValueExpression>
+                      <XPathQuery Type="String">Property[@Name='DiskIndex']</XPathQuery>
+                    </ValueExpression>
+                    <Operator>Equal</Operator>
+                    <ValueExpression>
+                      <Value Type="String">$Target/Property[Type="AP.Isilon.Disk"]/Index$</Value>
+                    </ValueExpression>
+                  </SimpleExpression>
+                </Expression>
+              </ConditionDetection>
+              <ConditionDetection ID="Mapper" TypeID="Perf!System.Performance.DataGenericMapper">
+                <ObjectName>Disk</ObjectName>
+                <CounterName>IO</CounterName>
+                <InstanceName>$Config/ReadOrWrite$</InstanceName>
+                <Value>$Data/Property[@Name="Value"]$</Value>
+              </ConditionDetection>
+            </MemberModules>
+            <Composition>
+              <Node ID="Mapper">
+                <Node ID="FilterOnDiskIndex">
+                  <Node ID="ScriptProbePS">
+                    <Node ID="Scheduler" />
+                  </Node>
+                </Node>
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>Perf!System.Performance.Data</OutputType>
+      </DataSourceModuleType>
+    </ModuleTypes>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon.DataSource.Performance.DiskIO">
+          <Name>Disk IO Performance Rule</Name>
+          <Description>Returns Disk IO</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.DataSource.Performance.DiskIO" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+
+</ManagementPackFragment>

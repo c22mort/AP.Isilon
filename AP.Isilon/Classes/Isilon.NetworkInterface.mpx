@@ -1,0 +1,73 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+
+        <!-- AP.Isilon.NetworkInterface -->
+        <ClassType ID="AP.Isilon.NetworkInterface" Base="System!System.LogicalEntity" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">          
+          <Property ID="Index" Key="true" Type="string" />
+          <Property ID="Name" Key="false" Type="string" />
+          <Property ID="NicName" Key="false" Type="string" />
+          <Property ID="IPAddresses" Key="false" Type="string" />
+          <Property ID="Subnets" Key="false" Type="string" />
+        </ClassType>
+      
+      </ClassTypes>
+
+      <RelationshipTypes>
+
+        <!-- AP.Isilon.NodeHostsNetworkInterface -->
+        <RelationshipType ID="AP.Isilon.NodeHostsNetworkInterface" Abstract="false" Accessibility="Public" Base="System!System.Hosting">
+          <Source ID="Source" Type="AP.Isilon.Node"/>
+          <Target ID="Target" Type="AP.Isilon.NetworkInterface"/>
+        </RelationshipType>
+
+      </RelationshipTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+
+        <!-- AP.Isilon.NetworkInterface -->
+        <DisplayString ElementID="AP.Isilon.NetworkInterface">
+          <Name>AP Isilon Network Interface</Name>
+          <Description>AP Isilon Network Interface Class</Description>
+        </DisplayString>
+        <!-- AP.Isilon.NetworkInterface : Name -->
+        <DisplayString ElementID="AP.Isilon.NetworkInterface" SubElementID="Name">
+          <Name>Name</Name>
+          <Description>Name of this Network Interface</Description>
+        </DisplayString>
+        <!-- AP.Isilon.NetworkInterface : NicName -->
+        <DisplayString ElementID="AP.Isilon.NetworkInterface" SubElementID="NicName">
+          <Name>NIC Name</Name>
+          <Description>Name of this Network Interfaces NIC</Description>
+        </DisplayString>
+        <!-- AP.Isilon.NetworkInterface : IPAddress -->
+        <DisplayString ElementID="AP.Isilon.NetworkInterface" SubElementID="IPAddresses">
+          <Name>IP Address</Name>
+          <Description>IP Address of this Network Interface</Description>
+        </DisplayString>
+        <!-- AP.Isilon.NetworkInterface : Subnet -->
+        <DisplayString ElementID="AP.Isilon.NetworkInterface" SubElementID="Subnets">
+          <Name>Subnets</Name>
+          <Description>Subnets that this Network Interface belongs to</Description>
+        </DisplayString>
+        <!-- AP.Isilon.NetworkInterface : Index -->
+        <DisplayString ElementID="AP.Isilon.NetworkInterface" SubElementID="Index">
+          <Name>Index</Name>
+          <Description>Index for this Network Interface</Description>
+        </DisplayString>
+
+
+        <!-- AP.Isilon.NodeHostsNetworkInterface -->
+        <DisplayString ElementID="AP.Isilon.NodeHostsNetworkInterface">
+          <Name>Node Hosts NetworkInterface</Name>
+          <Description>Defines Hosting Relationship between Nodes and NetworkInterfaces</Description>
+        </DisplayString>
+
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

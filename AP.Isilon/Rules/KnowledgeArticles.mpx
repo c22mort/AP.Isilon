@@ -1,0 +1,483 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <KnowledgeArticles>
+
+        <!-- AP.Isilon.Perf.Cluster.SnapshotCapacity.Percentage -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Cluster.SnapshotCapacity.Percentage" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Snapshot Capacity Rule, uses SNMP via a Powershell Script to calculate total snapshot capacity on an Isilon Cluster as a percentage.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.13.3.1.5 - .iso.org.dod.internet.private.enterprises.isilon.cluster.snapshots.snapshotTable.snapshotEntry.snapshotSize</para>
+                </listItem>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.3.1 - .iso.org.dod.internet.private.enterprises.isilon.cluster.ifsFilesystem.ifsTotalBytes</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Cluster.SnapshotCapacity.Tb -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Cluster.SnapshotCapacity.Tb" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Snapshot Capacity Percentage Rule, uses SNMP via a Powershell Script to calculate total snapshot capacity on an Isilon Cluster.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.13.3.1.5 - .iso.org.dod.internet.private.enterprises.isilon.cluster.snapshots.snapshotTable.snapshotEntry.snapshotSize</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Cluster.UsedCapacity.Tb -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Cluster.UsedCapacity.Tb" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Cluster Used Capacity Rule, uses SNMP via a Powershell Script to calculate total cluster capacity in Tb.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.3.2 - .iso.org.dod.internet.private.enterprises.isilon.cluster.ifsFilesystem.ifsUsedBytes</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Cluster.UsedCapacity.Percentage -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Cluster.UsedCapacity.Percentage" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Capacity Percentage Rule, uses SNMP via a Powershell Script to calculate used capacity on an Isilon Cluster as a percentage.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.3.2 - .iso.org.dod.internet.private.enterprises.isilon.cluster.ifsFilesystem.ifsUsedBytes</para>
+                </listItem>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.3.1 - .iso.org.dod.internet.private.enterprises.isilon.cluster.ifsFilesystem.ifsTotalBytes</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Cluster.Network.Inbound -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Cluster.Network.Inbound" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Cluster Network Bandwidth Inbound Rule, uses SNMP to collect Inbound Network Bandwidth (Converted from Bits/s to Mbits/s).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.2.2.2.0 - .iso.org.dod.internet.private.enterprises.isilon.cluster.clusterPerformance.clusterNetworkPerf.clusterNetworkInBitsPerSecond.0</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Cluster.Network.Outbound -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Cluster.Network.Outbound" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Cluster Network Bandwidth Outbound Rule, uses SNMP to collect Outbound Network Bandwidth (Converted from Bits/s to Mbits/s).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.2.2.4.0 - .iso.org.dod.internet.private.enterprises.isilon.cluster.clusterPerformance.clusterNetworkPerf.clusterNetworkOutBitsPerSecond.0</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Cluster.Filesystem.Inbound -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Cluster.Filesystem.Inbound" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Cluster Filesystem Bandwidth Inbound Rule, uses SNMP to collect Inbound Filesystem Bandwidth (Converted from Bits/s to Mbits/s).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.2.1.2.0 - .iso.org.dod.internet.private.enterprises.isilon.cluster.clusterPerformance.clusterIfsPerf.clusterIfsInBitsPerSecond.0</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Cluster.Filesystem.Outbound -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Cluster.Filesystem.Outbound" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Cluster Filesystem Bandwidth Outbound Rule, uses SNMP to collect Outbound Filesystem Bandwidth (Converted from Bits/s to Mbits/s).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.2.1.4.0 - .iso.org.dod.internet.private.enterprises.isilon.cluster.clusterPerformance.clusterIfsPerf.clusterIfsOutBitsPerSecond.0</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Cluster.CPU.Usage -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Cluster.CPU.Usage" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Cluster CPU Usage Rule, uses SNMP to collect CPU Usage.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.2.3.5.0 - .iso.org.dod.internet.private.enterprises.isilon.cluster.clusterPerformance.clusterCPUPerf.clusterCPUIdlePct.0</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Node.Network.Inbound -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Node.Network.Inbound" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Node Network Bandwidth Inbound Rule, uses SNMP to collect Inbound Network Bandwidth (Converted from Bits/s to Mbits/s).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.2.2.0 - iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeNetworkPerf.nodeNetworkInBitsPerSecond.0</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Node.Network.Outbound -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Node.Network.Outbound" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Node Network Bandwidth Outbound Rule, uses SNMP to collect Outbound Network Bandwidth (Converted from Bits/s to Mbits/s).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.2.4.0 - .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeNetworkPerf.nodeNetworkOutBitsPerSecond.0</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Node.Filesystem.Inbound -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Node.Filesystem.Inbound" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Node Filesystem Bandwidth Inbound Rule, uses SNMP to collect Inbound Filesystem Bandwidth (Converted from Bits/s to Mbits/s).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.1.2.0 - .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeIfsPerf.nodeIfsInBitsPerSecond.0</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Node.Filesystem.Outbound -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Node.Filesystem.Outbound" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Node Filesystem Bandwidth Outbound Rule, uses SNMP to collect Outbound Filesystem Bandwidth (Converted from Bits/s to Mbits/s).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.1.4.0 - .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeIfsPerf.nodeIfsOutBitsPerSecond.0</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Disk.Read -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Disk.Read" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Disk Read Rule, uses SNMP to collect DiskIO READ (Converted from Bits/s to Kb/s by a Powershell script).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.52.1.1 - .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.diskPerfTable.diskPerfEntry.diskPerfBay</para>
+                </listItem>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.52.1.5 - .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.diskPerfTable.diskPerfEntry.diskPerfOutBitsPerSecond</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Disk.Write -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Disk.Write" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Disk Write Rule, uses SNMP to collect DiskIO WRITE (Converted from Bits/s to Kb/s by a Powershell script).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.52.1.1 - .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.diskPerfTable.diskPerfEntry.diskPerfBay</para>
+                </listItem>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.52.1.4 - .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.diskPerfTable.diskPerfEntry.diskPerfInBitsPerSecond</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Disk.IOPs -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Disk.IOPs" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Disk IOPs Rule, uses SNMP to collect Disk IOPs.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.52.1.3.DiskIndex - iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.diskPerfTable.diskPerfEntry.diskPerfOpsPerSecond</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Node.TemperatureSensor -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Node.TemperatureSensor" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Node Temperature Sensor Rule, uses SNMP to collect Temperature °C.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.54.1.4.TempSensorIndex - .iso.org.dod.internet.private.enterprises.isilon.node.tempSensorTable.tempSensorEntry.tempSensorValue</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Node.TemperatureSensor -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Node.CPU.Usage" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Node CPU Usage Rule, uses SNMP to collect CPU Usage (percentage calculated via Powershell Script, cpuIdle Value is out of one thousand so 100-cpuIdle = cpu usage).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.3.5.0 - .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeCPUPerf.nodeCPUIdle.0</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Protocol.Network.Inbound -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Protocol.Network.Inbound" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Node Protocol Bandwidth Inbound Rule, uses SNMP to collect Inbound Protocol Bandwidth (Converted from Bits/s to Mbits/s).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.10.1.8.ProtocolOidSuffix - iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeProtocolPerfTable.nodeProtocolPerfEntry.inBitsPerSecond</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Protocol.Network.Outbound -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Protocol.Network.Outbound" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Node Protocol Bandwidth Outbound Rule, uses SNMP to collect Outbound Protocol Bandwidth (Converted from Bits/s to Mbits/s).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.10.1.13.ProtocolOidSuffix - iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeProtocolPerfTable.nodeProtocolPerfEntry.outBitsPerSecond</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Protocol.AverageLatency -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Protocol.AverageLatency" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Node Protocol Average Latency Rule, uses SNMP to collect Protocol Average Latency.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.10.1.16.ProtocolOidSuffix - iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeProtocolPerfTable.nodeProtocolPerfEntry.latencyAverage</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Perf.Protocol.AverageLatency -->
+        <KnowledgeArticle ElementID="AP.Isilon.Perf.Protocol.IOPs" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Isilon Node Protocol IOPs Rule, uses SNMP to collect Protocol IOPs.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.10.1.3.ProtocolOidSuffix - iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeProtocolPerfTable.nodeProtocolPerfEntry.protocolOpsPerSecond</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+      </KnowledgeArticles>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

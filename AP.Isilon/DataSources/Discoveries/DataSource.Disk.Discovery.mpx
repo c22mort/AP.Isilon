@@ -1,0 +1,91 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      <DataSourceModuleType ID="AP.Isilon.DataSource.Disk.Discovey" Accessibility="Internal">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="SpreadInterval" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="ClusterName" type="xsd:string" />
+          <xsd:element minOccurs="1" name="NodeName" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int"/>
+          <OverrideableParameter ID="SpreadInterval" Selector="$Config/SpreadInterval$" ParameterType="int"/>
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Scheduler" TypeID="System!System.Discovery.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval Unit="Seconds">$Config/IntervalSeconds$</Interval>
+                    <SpreadInitializationOverInterval Unit="Seconds">$Config/SpreadInterval$</SpreadInitializationOverInterval>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="ScriptProbePS" TypeID="Windows!Microsoft.Windows.PowerShellDiscoveryProbe">
+                <ScriptName>Discover-IsilonDisks.ps1</ScriptName>
+                <ScriptBody>$IncludeFileContent/Scripts/Discover-IsilonDisks.ps1$</ScriptBody>
+                <SnapIns />
+                <Parameters>
+                  <Parameter>
+                    <Name>SourceId</Name>
+                    <Value>$MPElement$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>ManagedEntityId</Name>
+                    <Value>$Target/Id$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>NodeIP</Name>
+                    <Value>$Target/Property[Type="AP.Isilon.Node"]/IPAddress$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>NodeName</Name>
+                    <Value>$Target/Property[Type="AP.Isilon.Node"]/Name$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>ClusterName</Name>
+                    <Value>$Target/Host/Property[Type="AP.Isilon.Cluster"]/Name$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>Community</Name>
+                    <Value>$Target/Host/Property[Type="AP.Isilon.Cluster"]/Community$</Value>
+                  </Parameter>
+                </Parameters>
+                <TimeoutSeconds>300</TimeoutSeconds>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="ScriptProbePS">
+                <Node ID="Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.Discovery.Data</OutputType>
+      </DataSourceModuleType>
+    </ModuleTypes>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon.DataSource.Disk.Discovey">
+          <Name>Isilon Disk Discovery</Name>
+          <Description>Discovers an Isilon Nodes Disks</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.DataSource.Disk.Discovey" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.DataSource.Disk.Discovey" SubElementID="SpreadInterval">
+          <Name>Spread Interval</Name>
+          <Description>Time that iterations of this module are spread over should be less that Interval Seconds.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+  
+</ManagementPackFragment>

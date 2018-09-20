@@ -3,9 +3,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProjectGuid>{b940cad1-0e8b-4d97-8197-cfebd3421803}</ProjectGuid>
     <RootNamespace>AP.Isilon</RootNamespace>
-    <Name>AP.Isilon</Name>
+    <Name>AP EMC Isilon Management Pack</Name>
     <ManagementPackName>AP.Isilon</ManagementPackName>
-    <Version>1.0.0.0</Version>
+    <Version>17.8.0.1</Version>
     <MpFrameworkVersion>v7.0.3</MpFrameworkVersion>
     <MpFrameworkProfile>OM</MpFrameworkProfile>
     <ProductVersion>1.1.0.0</ProductVersion>
@@ -13,22 +13,28 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
-    <GenerateSealed>false</GenerateSealed>
-    <Company>MyCompany</Company>
-    <Copyright>Copyright (c) MyCompany. All rights reserved.</Copyright>
-    <DelaySigning>false</DelaySigning>
-    <AssemblyOriginatorKeyFile />
+    <GenerateSealed>True</GenerateSealed>
+    <Company>AP</Company>
+    <Copyright>Copyright (c) AP. All rights reserved.</Copyright>
+    <DelaySigning>False</DelaySigning>
+    <AssemblyOriginatorKeyFile>C:\VSAE\AP.Isilon\key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>false</DebugSymbols>
     <OutputPath>bin\Release\</OutputPath>
-    <DelaySigning>false</DelaySigning>
-    <Company>MyCompany</Company>
-    <Copyright>Copyright (c) MyCompany. All rights reserved.</Copyright>
+    <DelaySigning>False</DelaySigning>
+    <Company>AP Management Packs</Company>
+    <Copyright>Copyright (c) AP management Packs. All rights reserved.</Copyright>
     <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile />
+    <AssemblyOriginatorKeyFile>C:\VSAE\AP.Isilon\key.snk</AssemblyOriginatorKeyFile>
+    <GenerateSealed>True</GenerateSealed>
   </PropertyGroup>
   <ItemGroup>
+    <ManagementPackReference Include="Microsoft.SystemCenter.DataWarehouse.Library">
+      <HintPath>C:\Program Files (x86)\System Center Visual Studio Authoring Extensions\References\OM2016\Microsoft.SystemCenter.DataWarehouse.Library.mp</HintPath>
+      <Alias>MSDL</Alias>
+      <MinVersion>7.2.11719.0</MinVersion>
+    </ManagementPackReference>
     <ManagementPackReference Include="Microsoft.SystemCenter.Library">
       <Alias>SC</Alias>
       <PackageToBundle>false</PackageToBundle>
@@ -43,12 +49,191 @@
     </ManagementPackReference>
     <ManagementPackReference Include="System.Library">
       <Alias>System</Alias>
-      <PackageToBundle>false</PackageToBundle>
+      <PackageToBundle>False</PackageToBundle>
     </ManagementPackReference>
     <ManagementPackReference Include="Microsoft.SystemCenter.Visualization.Library">
       <Alias>Visualization</Alias>
       <PackageToBundle>false</PackageToBundle>
     </ManagementPackReference>
+    <ManagementPackReference Include="System.NetworkManagement.Library">
+      <HintPath>C:\Program Files (x86)\System Center Visual Studio Authoring Extensions\References\OM2016\System.NetworkManagement.Library.mp</HintPath>
+      <Alias>SNL</Alias>
+      <MinVersion>7.2.11719.0</MinVersion>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Performance.Library">
+      <HintPath>C:\Program Files (x86)\System Center Visual Studio Authoring Extensions\References\OM2016\System.Performance.Library.mp</HintPath>
+      <Alias>Perf</Alias>
+      <MinVersion>7.0.8437.0</MinVersion>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Snmp.Library">
+      <HintPath>C:\Program Files (x86)\System Center Visual Studio Authoring Extensions\References\OM2016\System.Snmp.Library.mp</HintPath>
+      <Alias>SNMP</Alias>
+      <MinVersion>7.0.8437.0</MinVersion>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Isilon.Cluster.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\Isilon.Disk.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\Isilon.Licence.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\Isilon.NetworkInterface.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\Isilon.Node.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\Isilon.Protocol.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\Isilon.TempSensor.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\DataSource.SNMP.Walk.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Discoveries\DataSource.AmbientTempSensor.Discovery.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Discoveries\DataSource.Disk.Discovery.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Discoveries\DataSource.Licence.Discovery.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Discoveries\DataSource.Protocol.Discovery.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Monitors\Monitor.Cluster.Health.SNMP.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Monitors\Monitor.Disk.Health.SNMP.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Monitors\Monitor.Licence.Health.Powershell.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Monitors\Monitor.NetworkInterface.Health.SNMP.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Monitors\Monitor.Node.Health.SNMP.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Monitors\Monitor.Ping.Test.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Monitors\Monitor.Protocol.Health.SNMP.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\Monitors\Monitor.TempSensor.Health.SNMP.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\PerformanceRules\DataSource.Performance.ConvertBytesToTb.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\PerformanceRules\DataSource.Performance.CpuPercentage.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\PerformanceRules\DataSource.Performance.ConvertBitsToMb.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\PerformanceRules\DataSource.Performance.DiskIO.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\PerformanceRules\DataSource.Performance.Protocol.NetworkInOut.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\PerformanceRules\DataSource.Performance.SingleValue.SNMP.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\PerformanceRules\DataSource.Performance.SnapshotSpace.Percentage.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\PerformanceRules\DataSource.Performance.SnapshotSpace.Tb.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSources\PerformanceRules\DataSource.Performance.SNMP.Percentage.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Discoveries\Discoveries.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Discoveries\Discoveries.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Discoveries\KnowledgeArticles.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LanguagePack.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitors\DependancyMonitors.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Monitors\DependancyMonitors.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Monitors\KnowledgeArticles.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitors\UnitMonitors.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Monitors\UnitMonitors.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Rules\KnowledgeArticles.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rules\PerformanceRules.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Rules\PerformanceRules.mptg</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes" />
+    <Folder Include="DataSources\Monitors" />
+    <Folder Include="DataSources\Discoveries" />
+    <Folder Include="DataSources\PerformanceRules" />
+    <Folder Include="Monitors" />
+    <Folder Include="DataSources" />
+    <Folder Include="Discoveries" />
+    <Folder Include="Rules" />
+    <Folder Include="Scripts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Discoveries\Discoveries.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Monitors\DependancyMonitors.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Monitors\UnitMonitors.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Rules\PerformanceRules.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\ConvertBitsToMb.ps1" />
+    <EmbeddedResource Include="Scripts\ConvertBytesToTb.ps1" />
+    <EmbeddedResource Include="Scripts\Discover-AmbientTempSensor.ps1" />
+    <EmbeddedResource Include="Scripts\Discover-IsilonDisks.ps1" />
+    <EmbeddedResource Include="Scripts\Discover-IsilonLicences.ps1" />
+    <EmbeddedResource Include="Scripts\Discover-IsilonProtocols.ps1" />
+    <EmbeddedResource Include="Scripts\Get-IsilonDiskIO.ps1" />
+    <EmbeddedResource Include="Scripts\Get-IsilonProtocolNetworkInOut.ps1" />
+    <EmbeddedResource Include="Scripts\Get-IsilonSnapshotSpacePercentage.ps1" />
+    <EmbeddedResource Include="Scripts\Get-IsilonSnapshotSpaceTb.ps1" />
+    <EmbeddedResource Include="Scripts\Monitor-IsilonLicences.ps1" />
+    <EmbeddedResource Include="Scripts\Percentage.ps1" />
+    <EmbeddedResource Include="Scripts\SubtractPercentage.ps1" />
+    <EmbeddedResource Include="Scripts\TestConnection.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
 </Project>

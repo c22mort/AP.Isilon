@@ -1,0 +1,110 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        
+        <!-- AP.Isilon.Cluster, Based on NetworkManagement Node -->
+        <ClassType ID="AP.Isilon.Cluster" Base="System!System.LogicalEntity" Accessibility="Public" Abstract="false" Hosted="false" Singleton="false">
+          <Property ID="Name" Key="true" Type="string"/>
+          <Property ID="GUID" Key="false" Type="string"/>
+          <Property ID="IPAddress" Key="false" Type="string"/>
+          <Property ID="Community" Key="false" Type="string"/>
+          <Property ID="NodeCount" Key="false" Type="int"/>
+          <Property ID="ConfiguredNodes" Key="false" Type="string"/>
+          <Property ID="OnlineNodes" Key="false" Type="string"/>
+          <Property ID="OfflineNodes" Key="false" Type="string"/>
+          <Property ID="Location" Key="false" Type="string"/>
+          <Property ID="Contact" Key="false" Type="string"/>
+          <Property ID="Capacity" Key="false" Type="double"/>
+          <Property ID="Used" Key="false" Type="double"/>
+          <Property ID="Available" Key="false" Type="double"/>
+          <Property ID="UsedPercentage" Key="false" Type="double"/>
+        </ClassType>        
+      
+      </ClassTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+
+        <!-- AP.Isilon.Cluster -->
+        <DisplayString ElementID="AP.Isilon.Cluster">
+          <Name>AP Isilon Cluster</Name>
+          <Description>AP Isilon Cluster Class</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : Name -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="Name">
+          <Name>Cluster Name</Name>
+          <Description>Name of this ISILON Cluster</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : GUID -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="GUID">
+          <Name>Cluster GUID</Name>
+          <Description>GUID of this ISILON Cluster (Key Property)</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : IPAddress -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="IPAddress">
+          <Name>IP Address</Name>
+          <Description>IP Address of this ISILON Cluster</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : Community -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="Community">
+          <Name>SNMP Community String</Name>
+          <Description>SNMP Community of this ISILON Cluster</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : NodeCount -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="NodeCount">
+          <Name>Number of Nodes</Name>
+          <Description>Number of Nodes in this ISILON Cluster</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : ConfiguredNodes -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="ConfiguredNodes">
+          <Name>Configured Nodes</Name>
+          <Description>List of Configured Nodes in this ISILON Cluster</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : OnlineNodes -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="OnlineNodes">
+          <Name>Online Nodes</Name>
+          <Description>List of Online Nodes in this ISILON Cluster</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : OfflineNodes -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="OfflineNodes">
+          <Name>Offline Nodes</Name>
+          <Description>List of Offline Nodes in this ISILON Cluster</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : Location -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="Location">
+          <Name>Location</Name>
+          <Description>Location of this ISILON Cluster</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : Contact -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="Contact">
+          <Name>Contact Info.</Name>
+          <Description>Contact Information for this ISILON Cluster</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : Capacity -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="Capacity">
+          <Name>Capacity</Name>
+          <Description>Capacity of Isilon Cluster in Tb</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : Used -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="Used">
+          <Name>Used Capacity</Name>
+          <Description>Used Capcity of Isilon Cluster in Tb</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : Available -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="Available">
+          <Name>Available Capacity</Name>
+          <Description>Available Capcity of Isilon Cluster in Tb</Description>
+        </DisplayString>
+        <!-- AP.Isilon.Cluster : UsedPercentage -->
+        <DisplayString ElementID="AP.Isilon.Cluster" SubElementID="UsedPercentage">
+          <Name>Used Percentage</Name>
+          <Description>Percentage Used Capacity of Isilon Cluster</Description>
+        </DisplayString>
+
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

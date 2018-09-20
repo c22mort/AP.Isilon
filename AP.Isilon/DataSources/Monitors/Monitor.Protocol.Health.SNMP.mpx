@@ -1,0 +1,166 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <MonitorTypes>
+      <UnitMonitorType ID="AP.Isilon.Monitor.Protocol.Health.SNMP" Accessibility="Public">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="ProtocolHealthy" NoDetection="false" />
+          <MonitorTypeState ID="ProtocolWarning" NoDetection="false" />
+          <MonitorTypeState ID="ProtocolCritical" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>System!System.ExpressionEvaluatorSchema</SchemaType>
+            <SchemaType>SNMP!System.SnmpVarBindsSchema</SchemaType>
+            <SchemaType>SNL!System.NetworkManagement.Schema.NetworkConfiguration</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="IP" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="NoOfRetries" type="xsd:unsignedInt" default="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Timeout " type="xsd:unsignedInt" default="500" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Community" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="LowerThreshold" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="HigherThreshold" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="NoOfRetries" Selector="$Config/NoOfRetries$" ParameterType="int" />
+          <OverrideableParameter ID="Timeout" Selector="$Config/Timeout$" ParameterType="int" />
+          <OverrideableParameter ID="LowerThreshold" Selector="$Config/LowerThreshold$" ParameterType="int" />
+          <OverrideableParameter ID="HigherThreshold" Selector="$Config/HigherThreshold$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+              <Scheduler>
+                <SimpleReccuringSchedule>
+                  <Interval>$Config/IntervalSeconds$</Interval>
+                  <SpreadInitializationOverInterval Unit="Seconds">$Config/IntervalSeconds$</SpreadInitializationOverInterval>
+                </SimpleReccuringSchedule>
+                <ExcludeDates />
+              </Scheduler>
+            </DataSource>
+            <ProbeAction ID="SnmpProbe" TypeID="SNL!System.NetworkManagement.SnmpProbe">
+              <Walk>false</Walk>
+              <WalkReturnMultipleItems>true</WalkReturnMultipleItems>
+              <NoOfRetries>$Config/NoOfRetries$</NoOfRetries>
+              <Timeout>$Config/Timeout$</Timeout>
+              <Port>161</Port>
+              <IsWriteAction>false</IsWriteAction>
+              <IP>$Config/IP$</IP>
+              <CommunityString>$Config/Community$</CommunityString>
+              <Version>2</Version>
+              <SnmpVarBinds>
+                <SnmpVarBind>
+                  <!-- .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeProtocolPerfTable.nodeProtocolPerfEntry.latencyAverage -->
+                  <OID>.1.3.6.1.4.1.12124.2.2.10.1.16$Target/Property[Type="AP.Isilon.Protocol"]/OidSuffix$</OID>
+                  <Syntax>0</Syntax>
+                  <Value VariantType="8" />
+                </SnmpVarBind>
+              </SnmpVarBinds>
+            </ProbeAction>
+            <ConditionDetection ID="FilterProtocolHealthy" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="Integer">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.2.10.1.16$Target/Property[Type="AP.Isilon.Protocol"]/OidSuffix$']/Value</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Less</Operator>
+                  <ValueExpression>
+                    <Value Type="Integer">$Config/LowerThreshold$</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="FilterProtocolWarning" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Integer">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.2.10.1.16$Target/Property[Type="AP.Isilon.Protocol"]/OidSuffix$']/Value</XPathQuery>
+                      </ValueExpression>
+                      <Operator>GreaterEqual</Operator>
+                      <ValueExpression>
+                        <Value Type="Integer">$Config/LowerThreshold$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Integer">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.2.10.1.16$Target/Property[Type="AP.Isilon.Protocol"]/OidSuffix$']/Value</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Less</Operator>
+                      <ValueExpression>
+                        <Value Type="Integer">$Config/HigherThreshold$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="FilterProtocolCritical" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="Integer">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.2.10.1.16$Target/Property[Type="AP.Isilon.Protocol"]/OidSuffix$']/Value</XPathQuery>
+                  </ValueExpression>
+                  <Operator>GreaterEqual</Operator>
+                  <ValueExpression>
+                    <Value Type="Integer">$Config/HigherThreshold$</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="ProtocolHealthy">
+              <Node ID="FilterProtocolHealthy">
+                <Node ID="SnmpProbe">
+                  <Node ID="Scheduler"/>
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="ProtocolWarning">
+              <Node ID="FilterProtocolWarning">
+                <Node ID="SnmpProbe">
+                  <Node ID="Scheduler"/>
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="ProtocolCritical">
+              <Node ID="FilterProtocolCritical">
+                <Node ID="SnmpProbe">
+                  <Node ID="Scheduler"/>
+                </Node>
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+    </MonitorTypes>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon.Monitor.Protocol.Health.SNMP">
+          <Name>Isilon Protocol Status</Name>
+          <Description>Monitors EMC Isilon Protocol Status via SNMP (ok/attn/down/invalid)</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.Protocol.Health.SNMP" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.Protocol.Health.SNMP" SubElementID="NoOfRetries">
+          <Name>Number of Retries</Name>
+          <Description>Number of times that the request should be retried if the first request fails.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.Protocol.Health.SNMP" SubElementID="Timeout">
+          <Name>Timeout</Name>
+          <Description>Seconds that the request must be complete before it is terminated.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

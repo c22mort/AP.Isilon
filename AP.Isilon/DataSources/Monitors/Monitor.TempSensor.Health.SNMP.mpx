@@ -1,0 +1,177 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <MonitorTypes>
+      <UnitMonitorType ID="AP.Isilon.Monitor.TempSensor.Health.SNMP" Accessibility="Public">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="TemperatureHealthy" NoDetection="false" />
+          <MonitorTypeState ID="TemperatureWarning" NoDetection="false" />
+          <MonitorTypeState ID="TemperatureCritical" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>System!System.ExpressionEvaluatorSchema</SchemaType>
+            <SchemaType>SNMP!System.SnmpVarBindsSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="IP" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="NoOfRetries" type="xsd:unsignedInt" default="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Timeout " type="xsd:unsignedInt" default="500" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Community" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="TemperatureLow" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="TemperatureHigh" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="NoOfRetries" Selector="$Config/NoOfRetries$" ParameterType="int" />
+          <OverrideableParameter ID="Timeout" Selector="$Config/Timeout$" ParameterType="int" />
+          <OverrideableParameter ID="TemperatureLow" Selector="$Config/TemperatureLow$" ParameterType="double" />
+          <OverrideableParameter ID="TemperatureHigh" Selector="$Config/TemperatureHigh$" ParameterType="double" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+              <Scheduler>
+                <SimpleReccuringSchedule>
+                  <Interval>$Config/IntervalSeconds$</Interval>
+                  <SpreadInitializationOverInterval>$Config/IntervalSeconds$</SpreadInitializationOverInterval>
+                </SimpleReccuringSchedule>
+                <ExcludeDates />
+              </Scheduler>
+            </DataSource>
+            <ProbeAction ID="SnmpProbe" TypeID="SNL!System.NetworkManagement.SnmpProbe">
+              <Walk>false</Walk>
+              <WalkReturnMultipleItems>true</WalkReturnMultipleItems>
+              <NoOfRetries>$Config/NoOfRetries$</NoOfRetries>
+              <Timeout>$Config/Timeout$</Timeout>
+              <Port>161</Port>
+              <IsWriteAction>false</IsWriteAction>
+              <IP>$Config/IP$</IP>
+              <CommunityString>$Config/Community$</CommunityString>
+              <Version>2</Version>
+              <SnmpVarBinds>
+                <SnmpVarBind>
+                  <!-- .iso.org.dod.internet.private.enterprises.isilon.node.tempSensorTable.tempSensorEntry.tempSensorValue -->
+                  <OID>.1.3.6.1.4.1.12124.2.54.1.4.$Target/Property[Type="AP.Isilon.TempSensor"]/Index$</OID>
+                  <Syntax>0</Syntax>
+                  <Value VariantType="8" />
+                </SnmpVarBind>
+              </SnmpVarBinds>
+            </ProbeAction>
+            <ConditionDetection ID="TemperatureHealthyFilterCondition" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <!-- .iso.org.dod.internet.private.enterprises.isilon.node.tempSensorTable.tempSensorEntry.tempSensorValue -->
+                    <XPathQuery Type="Double">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.54.1.4.$Target/Property[Type="AP.Isilon.TempSensor"]/Index$']/Value</XPathQuery>
+                  </ValueExpression>
+                  <Operator>LessEqual</Operator>
+                  <ValueExpression>
+                    <Value Type="Double">$Config/TemperatureLow$</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="TemperatureWarningFilterCondition" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <!-- .iso.org.dod.internet.private.enterprises.isilon.node.tempSensorTable.tempSensorEntry.tempSensorValue -->
+                        <XPathQuery Type="Double">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.54.1.4.$Target/Property[Type="AP.Isilon.TempSensor"]/Index$']/Value</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Greater</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/TemperatureLow$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <!-- .iso.org.dod.internet.private.enterprises.isilon.node.tempSensorTable.tempSensorEntry.tempSensorValue -->
+                        <XPathQuery Type="Double">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.54.1.4.$Target/Property[Type="AP.Isilon.TempSensor"]/Index$']/Value</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Less</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/TemperatureHigh$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="TemperatureCriticalFilterCondition" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <!-- .iso.org.dod.internet.private.enterprises.isilon.node.tempSensorTable.tempSensorEntry.tempSensorValue -->
+                    <XPathQuery Type="Double">SnmpVarBinds/SnmpVarBind[OID='.1.3.6.1.4.1.12124.2.54.1.4.$Target/Property[Type="AP.Isilon.TempSensor"]/Index$']/Value</XPathQuery>
+                  </ValueExpression>
+                  <Operator>GreaterEqual</Operator>
+                  <ValueExpression>
+                    <Value Type="Double">$Config/TemperatureHigh$</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="TemperatureHealthy">
+              <Node ID="TemperatureHealthyFilterCondition">
+                <Node ID="SnmpProbe">
+                  <Node ID="Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="TemperatureWarning">
+              <Node ID="TemperatureWarningFilterCondition">
+                <Node ID="SnmpProbe">
+                  <Node ID="Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="TemperatureCritical">
+              <Node ID="TemperatureCriticalFilterCondition">
+                <Node ID="SnmpProbe">
+                  <Node ID="Scheduler" />
+                </Node>
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+    </MonitorTypes>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AP.Isilon.Monitor.TempSensor.Health.SNMP">
+          <Name>Isilon Temperature Sensor Health</Name>
+          <Description>Monitors Isilon Ambient Temperature Sensor Temperature</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.TempSensor.Health.SNMP" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.TempSensor.Health.SNMP" SubElementID="NoOfRetries">
+          <Name>Number of Retries</Name>
+          <Description>Number of times that the request should be retried if the first request fails.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.TempSensor.Health.SNMP" SubElementID="Timeout">
+          <Name>Timeout</Name>
+          <Description>Seconds that the request must be complete before it is terminated.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.TempSensor.Health.SNMP" SubElementID="TemperatureLow">
+          <Name>Lower Temperature Threshold</Name>
+          <Description>If Temperature is less than or equal to this value, Temperature is in an okay condition (if It's over but less than Higher Temperature Threshold then Temperature is in a warning condition)</Description>
+        </DisplayString>
+        <DisplayString ElementID="AP.Isilon.Monitor.TempSensor.Health.SNMP" SubElementID="TemperatureHigh">
+          <Name>Higher Temperature Threshold</Name>
+          <Description>If Temperature is greater than or equal to this value, Temperature is in a critical condition (if it's less but greater than Lower Temperature Threshold then Temperature is in a warning condition)</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

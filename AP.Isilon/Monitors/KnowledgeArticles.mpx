@@ -1,0 +1,273 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <KnowledgeArticles>
+
+        <!-- AP.Isilon.Monitor.Cluster.Health -->
+        <KnowledgeArticle ElementID="AP.Isilon.Monitor.Cluster.Health" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Uses SNMP to get health state of the Isilon Cluster.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Health States</title>
+              <list>
+                <listItem>
+                  <para>ClusterOkay - Isilon Cluster reporting all is okay.</para>
+                </listItem>
+                <listItem>
+                  <para>ClusterWarning - Isilon Cluster reporting a warning condition (Possibly a disk, Network Interface or Node Issue)</para>
+                </listItem>
+                <listItem>
+                  <para>ClusterDown - Isilon Cluster is reporting a downed state</para>
+                </listItem>
+              </list>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.1.2.0 - .iso.org.dod.internet.private.enterprises.isilon.cluster.clusterStatus.clusterHealth</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Monitor.Node.Health -->
+        <KnowledgeArticle ElementID="AP.Isilon.Monitor.Node.Health" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Uses SNMP to get health state of the Isilon Node.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Health States</title>
+              <list>
+                <listItem>
+                  <para>NodeOkay - Isilon Node reporting all is okay.</para>
+                </listItem>
+                <listItem>
+                  <para>NodeWarning - Isilon Node reporting a warning condition (Possibly a disk or Network Interface Issue)</para>
+                </listItem>
+                <listItem>
+                  <para>NodeDown - Isilon Node is reporting a downed state</para>
+                </listItem>
+              </list>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.1.2.0 - .iso.org.dod.internet.private.enterprises.isilon.node.nodeStatus.nodeHealth</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Monitor.Disk.Health -->
+        <KnowledgeArticle ElementID="AP.Isilon.Monitor.Disk.Health" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Uses SNMP to get health state of Isilon Nodes Disks.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Health States</title>
+              <list>
+                <listItem>
+                  <para>DiskOkay - Isilon Disk reporting all is okay.</para>
+                </listItem>
+                <listItem>
+                  <para>DiskWarning - Isilon Disk reporting SMARTFAIL</para>
+                </listItem>
+                <listItem>
+                  <para>DiskDown - Isilon Disk has Failed.</para>
+                </listItem>
+              </list>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.52.1.5.DiskIndex - .iso.org.dod.internet.private.enterprises.isilon.node.diskTable.diskEntry.diskStatus</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Monitor.Node.PingTest -->
+        <KnowledgeArticle ElementID="AP.Isilon.Monitor.Node.PingTest" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Uses powershell to perform a quick Ping Test (Test-Connection) on a given Node.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Health States</title>
+              <list>
+                <listItem>
+                  <para>DeviceOkay - at lesat 1/3 pings replied succesfully.</para>
+                </listItem>
+                <listItem>
+                  <para>DeviceDown - All 3 pings Failed.</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Monitor.Licence.Health -->
+        <KnowledgeArticle ElementID="AP.Isilon.Monitor.Licence.Health" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Uses SNMP via Powershell Script to get health state of Isilon Licences.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Health States</title>
+              <list>
+                <listItem>
+                  <para>LicenceHealthy - Licence is either Activated or still in Evaluation.</para>
+                </listItem>
+                <listItem>
+                  <para>LicenceUnhealthy - Licence is either Inactive or an Expired Evaluation Licence.</para>
+                </listItem>
+              </list>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.1.5.1.1.3 - .iso.org.dod.internet.private.enterprises.isilon.cluster.licenses.licenseTable.licenseEntry.licenseStatus</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Monitor.Protocol.Health -->
+        <KnowledgeArticle ElementID="AP.Isilon.Monitor.Protocol.Health" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Uses SNMP to get health state of Isilon Protocol.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Health States</title>
+              <list>
+                <listItem>
+                  <para>ProtocolHealthy - Average Latency is less that 500µs</para>
+                </listItem>
+                <listItem>
+                  <para>ProtocolWarning - Average Latency is between 500µs and 1000µs</para>
+                </listItem>
+                <listItem>
+                  <para>ProtocolHealthy - Average Latency is over 1000µs</para>
+                </listItem>
+              </list>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.2.10.1.16.OidSuffix - .iso.org.dod.internet.private.enterprises.isilon.node.nodePerformance.nodeProtocolPerfTable.nodeProtocolPerfEntry.latencyAverage</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Monitor.NetworkInterface.Health -->
+        <KnowledgeArticle ElementID="AP.Isilon.Monitor.NetworkInterface.Health" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Uses SNMP to get health state of Isilon Node Network Interface.
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Health States</title>
+              <list>
+                <listItem>
+                  <para>InterfaceUp - SNMP Reports Interface Up</para>
+                </listItem>
+                <listItem>
+                  <para>InterfaceDown - SNMP Reports Interface Down</para>
+                </listItem>
+                <listItem>
+                  <para>InterfaceDormant - SNMP Reports Interface Dormant, Testing, unknown or notPresent</para>
+                </listItem>
+              </list>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.2.1.2.2.1.8.Index- .iso.org.dod.internet.mgmt.mib-2.interfaces.ifTable.ifEntry.ifOperStatus</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+        <!-- AP.Isilon.Monitor.Disk.Health -->
+        <KnowledgeArticle ElementID="AP.Isilon.Monitor.TempSensor.Health" Visible="true">
+          <MamlContent>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Summary</title>
+              <para>
+                Uses SNMP to get health state of Isilon Node Temperature Sensor(s).
+              </para>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>Health States</title>
+              <list>
+                <listItem>
+                  <para>TemperatureHealthy - Temperature Sensor is less than or equal to Lower Threshold</para>
+                </listItem>
+                <listItem>
+                  <para>TemperatureWarning - Temperature Sensor is greater than Lower Threshold but less then Higher Threshold</para>
+                </listItem>
+                <listItem>
+                  <para>TemperatureCritical - Temperature Sensor is greater than or equal to Higher Threshold</para>
+                </listItem>
+              </list>
+            </section>
+            <section xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <title>SNMP Information</title>
+              <para>SNMP OIDs Used;</para>
+              <list>
+                <listItem>
+                  <para>.1.3.6.1.4.1.12124.2.54.1.4.Index - .iso.org.dod.internet.private.enterprises.isilon.node.tempSensorTable.tempSensorEntry.tempSensorValue</para>
+                </listItem>
+              </list>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+      </KnowledgeArticles>
+    </LanguagePack>
+  </LanguagePacks>  
+</ManagementPackFragment>
