@@ -259,3 +259,4 @@ __pycache__/
 # AP.Isilon Ignores
 clusters.csv
 config.csv
+key.snk
