@@ -104,6 +104,8 @@
     <None Include="config.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="example_clusters.csv" />
+    <None Include="example_config.csv" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
